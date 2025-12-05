@@ -47,8 +47,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/pengaduan/{pengaduan}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
     
     // Peta Management
-    Route::resource('peta', PetaController::class)->except(['index', 'show']);
     Route::get('/peta', [PetaController::class, 'adminIndex'])->name('peta.index');
+    Route::get('/peta/create', [PetaController::class, 'create'])->name('peta.create');
+    Route::post('/peta', [PetaController::class, 'store'])->name('peta.store');
+    Route::get('/peta/{peta}/edit', [PetaController::class, 'edit'])->name('peta.edit');
+    Route::put('/peta/{peta}', [PetaController::class, 'update'])->name('peta.update');
+    Route::delete('/peta/{peta}', [PetaController::class, 'destroy'])->name('peta.destroy');
     
     // Galeri Management
     Route::resource('galeri', GaleriController::class)->except(['index']);

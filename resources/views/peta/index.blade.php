@@ -125,12 +125,65 @@
 
     // Initialize map
     document.addEventListener('DOMContentLoaded', function() {
-        map = L.map('map').setView([defaultLat, defaultLng], 14);
+        map = L.map('map').setView([-6.90368, 113.72712], 14);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
+
+        // Add village boundary polygon - Desa Ambunten Tengah
+        // Koordinat batas wilayah Desa Ambunten Tengah, Kec. Ambunten, Kab. Sumenep
+        // Pusat: -6.90368, 113.72712
+        // Untuk lengkungan detail, tambahkan lebih banyak titik koordinat
+        const villageBoundary = [
+            [-6.8980, 113.7210],  // Titik 1 - Utara Barat
+            [-6.8965, 113.7220],  // Titik 2
+            [-6.8950, 113.7240],  // Titik 3 - Utara
+            [-6.8955, 113.7260],  // Titik 4
+            [-6.8960, 113.7280],  // Titik 5
+            [-6.8970, 113.7300],  // Titik 6 - Utara Timur
+            [-6.8985, 113.7315],  // Titik 7
+            [-6.9000, 113.7325],  // Titik 8
+            [-6.9020, 113.7330],  // Titik 9 - Timur
+            [-6.9045, 113.7328],  // Titik 10
+            [-6.9070, 113.7322],  // Titik 11
+            [-6.9090, 113.7315],  // Titik 12
+            [-6.9100, 113.7310],  // Titik 13 - Tenggara
+            [-6.9115, 113.7290],  // Titik 14
+            [-6.9125, 113.7270],  // Titik 15
+            [-6.9130, 113.7260],  // Titik 16 - Selatan
+            [-6.9125, 113.7240],  // Titik 17
+            [-6.9118, 113.7225],  // Titik 18
+            [-6.9110, 113.7210],  // Titik 19 - Barat Daya
+            [-6.9090, 113.7195],  // Titik 20
+            [-6.9070, 113.7185],  // Titik 21
+            [-6.9050, 113.7180],  // Titik 22 - Barat
+            [-6.9025, 113.7185],  // Titik 23
+            [-6.9000, 113.7195],  // Titik 24
+            [-6.8980, 113.7210]   // Kembali ke titik awal (HARUS sama dengan titik 1)
+        ];
+
+        // Draw boundary dengan styling
+        const boundaryPolygon = L.polygon(villageBoundary, {
+            color: '#2563eb',           // Warna garis biru
+            weight: 3,                  // Ketebalan garis
+            opacity: 0.8,               // Transparansi garis
+            fillColor: '#3b82f6',       // Warna isi biru muda
+            fillOpacity: 0.1,           // Transparansi isi (sangat tipis)
+            dashArray: '10, 5'          // Garis putus-putus
+        }).addTo(map);
+
+        // Popup info untuk boundary
+        boundaryPolygon.bindPopup(`
+            <div class="p-3">
+                <h3 class="font-bold text-gray-900 mb-1">Wilayah Desa Ambunten Tengah</h3>
+                <p class="text-sm text-gray-600">Batas administratif Desa Ambunten Tengah</p>
+                <p class="text-xs text-gray-500 mt-1">Kec. Ambunten, Kab. Sumenep</p>
+            </div>
+        `, {
+            className: 'custom-popup'
+        });
 
         markerGroup = L.layerGroup().addTo(map);
 
@@ -164,21 +217,118 @@
     }
 
     function createMarker(item) {
-        // Custom icon berdasarkan kategori
-        const icons = {
+        // Custom icon berdasarkan kategori dengan berbagai style
+        // Opsi 1: Emoji (sudah ada)
+        const emojiIcons = {
             'fasilitas_umum': '🏥',
             'wisata': '🎯',
             'pemerintahan': '🏛️',
             'lainnya': '📍'
         };
 
+        // Opsi 2: Font Awesome / SVG Icons dengan warna berbeda
+        const coloredIcons = {
+            'fasilitas_umum': { icon: '🏥', color: '#ef4444', bg: '#fee2e2' },  // Merah
+            'wisata': { icon: '🎯', color: '#10b981', bg: '#d1fae5' },          // Hijau
+            'pemerintahan': { icon: '🏛️', color: '#3b82f6', bg: '#dbeafe' },    // Biru
+            'lainnya': { icon: '📍', color: '#f59e0b', bg: '#fed7aa' }          // Orange
+        };
+
+        const iconData = coloredIcons[item.kategori] || coloredIcons['lainnya'];
+
+        // Style 1: Marker dengan border berwarna
         const icon = L.divIcon({
-            html: `<div class="text-2xl">${icons[item.kategori] || '📍'}</div>`,
-            className: 'custom-marker',
-            iconSize: [30, 30],
-            iconAnchor: [15, 30],
-            popupAnchor: [0, -30]
+            html: `
+                <div style="
+                    background: ${iconData.bg};
+                    border: 3px solid ${iconData.color};
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 20px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+                ">
+                    ${iconData.icon}
+                </div>
+            `,
+            className: 'custom-marker-icon',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
         });
+
+        // ALTERNATIF: Uncomment salah satu style di bawah untuk ganti tampilan
+        
+        // Style 2: Marker dengan ekor (tear drop)
+        /*
+        const icon = L.divIcon({
+            html: `
+                <div style="
+                    position: relative;
+                    width: 35px;
+                    height: 45px;
+                ">
+                    <svg viewBox="0 0 24 24" fill="${iconData.color}" style="width: 100%; height: 100%;">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <div style="
+                        position: absolute;
+                        top: 8px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        font-size: 16px;
+                    ">
+                        ${iconData.icon}
+                    </div>
+                </div>
+            `,
+            className: 'custom-marker-icon',
+            iconSize: [35, 45],
+            iconAnchor: [17, 45],
+            popupAnchor: [0, -45]
+        });
+        */
+
+        // Style 3: Marker kotak dengan shadow
+        /*
+        const icon = L.divIcon({
+            html: `
+                <div style="
+                    background: linear-gradient(135deg, ${iconData.color} 0%, ${iconData.bg} 100%);
+                    border-radius: 10px;
+                    width: 45px;
+                    height: 45px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 24px;
+                    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+                    transform: rotate(45deg);
+                ">
+                    <span style="transform: rotate(-45deg);">${iconData.icon}</span>
+                </div>
+            `,
+            className: 'custom-marker-icon',
+            iconSize: [45, 45],
+            iconAnchor: [22, 45],
+            popupAnchor: [0, -45]
+        });
+        */
+
+        // Style 4: Menggunakan gambar custom PNG/SVG
+        /*
+        const icon = L.icon({
+            iconUrl: '/images/markers/' + item.kategori + '.png',  // Siapkan file di public/images/markers/
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32],
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+            shadowSize: [41, 41]
+        });
+        */
 
         const marker = L.marker([item.latitude, item.longitude], { icon: icon })
             .addTo(markerGroup);
@@ -255,14 +405,9 @@
     // Custom marker style
     const style = document.createElement('style');
     style.textContent = `
-        .custom-marker {
-            background: white;
-            border: 3px solid #2563eb;
-            border-radius: 50%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .custom-marker-icon {
+            background: transparent !important;
+            border: none !important;
         }
         .custom-popup .leaflet-popup-content-wrapper {
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
