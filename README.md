@@ -148,9 +148,7 @@ Tampilan optimal di berbagai ukuran layar (desktop, tablet, smartphone).
 ## 👥 Tim Pengembang
 
 **KKN Universitas Wiraraja Sumenep 2025**
-- Desa Ambunten Tengah
-- Kecamatan Ambunten
-- Kabupaten Sumenep
+- JOICE HIELMAN ABBRORI
 
 ---
 
@@ -163,7 +161,7 @@ Proyek ini dikembangkan untuk kepentingan publik dan pengabdian masyarakat dalam
 ## 🤝 Kontribusi
 
 Proyek ini merupakan bagian dari program KKN. Untuk saran dan masukan, silakan hubungi:
-- **Email**: admin@desa.id
+- **Email**: hielmanabbrori@gmail.com
 - **Website**: [Coming Soon]
 
 ---
