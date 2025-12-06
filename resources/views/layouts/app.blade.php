@@ -16,56 +16,60 @@
 </head>
 <body class="font-sans antialiased bg-gray-50">
     <!-- Navbar -->
-    <nav x-data="{ open: false, scrolled: false }" 
-         @scroll.window="scrolled = window.scrollY > 20"
-         :class="scrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'"
-         class="fixed w-full z-50 transition-all duration-300">
+        <nav x-data="{ open: false, scrolled: false }" 
+            @scroll.window="scrolled = window.scrollY > 20"
+            :class="scrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'"
+            class="fixed w-full z-50 transition-all duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
+            <div class="flex justify-between h-16">
                 <!-- Logo & Brand -->
                 <div class="flex items-center">
                     <a href="{{ route('beranda') }}" class="flex items-center space-x-3">
                         @if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa']))
-                        <img src="{{ asset('storage/' . $pengaturan['logo_desa']) }}" alt="Logo" class="h-12 w-12 object-cover rounded-lg">
+                        <img src="{{ asset('storage/' . $pengaturan['logo_desa']) }}" alt="Logo" class="h-10 w-10 object-cover rounded-lg ring-1 ring-gray-200">
                         @else
-                        <div class="h-12 w-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">{{ substr($pengaturan['nama_desa'] ?? 'D', 0, 1) }}</span>
+                        <div class="h-10 w-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center ring-1 ring-blue-300/40">
+                            <span class="text-white font-bold text-lg">{{ substr($pengaturan['nama_desa'] ?? 'D', 0, 1) }}</span>
                         </div>
                         @endif
                         <div>
-                            <h1 class="text-xl font-bold text-gray-900">{{ $pengaturan['nama_desa'] ?? 'Desa' }}</h1>
+                            <h1 class="text-lg md:text-xl font-semibold text-gray-900 tracking-tight">{{ $pengaturan['nama_desa'] ?? 'Desa' }}</h1>
                             @if(isset($pengaturan['kecamatan']) && !empty($pengaturan['kecamatan']))
-                            <p class="text-xs text-gray-600">{{ $pengaturan['kecamatan'] }}</p>
+                            <p class="text-[11px] text-gray-600">{{ $pengaturan['kecamatan'] }}</p>
                             @endif
                         </div>
                     </a>
                 </div>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-1">
+                <div class="hidden md:flex items-center space-x-2">
                     <a href="{{ route('beranda') }}" class="nav-link {{ request()->routeIs('beranda') ? 'active' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                         </svg>
                         <span>Beranda</span>
+                        <span class="indicator"></span>
                     </a>
                     <a href="{{ route('berita.index') }}" class="nav-link {{ request()->routeIs('berita.*') ? 'active' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                         </svg>
                         <span>Berita</span>
+                        <span class="indicator"></span>
                     </a>
                     <a href="{{ route('peta.index') }}" class="nav-link {{ request()->routeIs('peta.*') ? 'active' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
                         </svg>
                         <span>Peta Desa</span>
+                        <span class="indicator"></span>
                     </a>
                     <a href="{{ route('galeri.index') }}" class="nav-link {{ request()->routeIs('galeri.*') ? 'active' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                         <span>Galeri</span>
+                        <span class="indicator"></span>
                     </a>
                     <a href="{{ route('pengaduan.index') }}" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium">
                         Pengaduan
@@ -85,15 +89,15 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div x-show="open" 
+           <div x-show="open" 
              @click.away="open = false"
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0 -translate-y-2"
-             x-transition:enter-end="opacity-100 translate-y-0"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100 translate-y-0"
-             x-transition:leave-end="opacity-0 -translate-y-2"
-             class="md:hidden bg-white border-t border-gray-200 shadow-lg">
+               x-transition:enter="transition ease-out duration-400"
+               x-transition:enter-start="opacity-0 -translate-y-1"
+               x-transition:enter-end="opacity-100 translate-y-0"
+               x-transition:leave="transition ease-in duration-300"
+               x-transition:leave-start="opacity-100 translate-y-0"
+               x-transition:leave-end="opacity-0 -translate-y-1"
+               class="md:hidden bg-white border-t border-gray-200 shadow-lg">
             <div class="px-4 pt-3 pb-4 space-y-2">
                 <a href="{{ route('beranda') }}" 
                    @click="open = false"
@@ -220,13 +224,44 @@
 
     <style>
         .nav-link {
-            @apply flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-medium;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            color: #374151; /* gray-700 */
+            transition: color 350ms cubic-bezier(0.22, 1, 0.36, 1), background-color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            will-change: background-color, color;
+            transform-origin: center;
+            outline: none;
         }
+        .nav-link:hover { 
+            color: #1d4ed8; /* blue-700 */
+            background-color: #eff6ff; /* blue-50 */
+        }
+        .nav-link .indicator {
+            position: absolute;
+            bottom: -6px;
+            left: 10px;
+            height: 2px;
+            width: 0;
+            background: linear-gradient(90deg, #2563eb, #1e40af);
+            border-radius: 9999px;
+            transition: width 250ms ease;
+        }
+        .nav-link:hover .indicator { width: calc(100% - 20px); }
         .nav-link.active {
-            @apply bg-blue-100 text-blue-700;
+            color: #1d4ed8;
+            background-color: #dbeafe; /* blue-100 */
+        }
+        .nav-link.active .indicator { width: calc(100% - 20px); }
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .nav-link, .nav-link .indicator { transition: none; }
         }
         .mobile-nav-link {
-            @apply flex items-center space-x-2 px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-medium;
+            @apply flex items-center space-x-2 px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 font-medium;
         }
         .mobile-nav-link.active {
             @apply bg-blue-100 text-blue-700;
