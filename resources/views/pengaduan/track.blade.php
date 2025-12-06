@@ -79,23 +79,34 @@
                         <div class="mt-6 pt-6 border-t border-gray-200">
                             <h4 class="font-bold text-gray-900 mb-4">Riwayat Status</h4>
                             <div class="space-y-4">
+                                <!-- Selesai -->
                                 <div class="flex items-start">
-                                    <div class="w-2 h-2 rounded-full mt-2 mr-3" 
-                                         :class="'{{ $item->status }}' === 'selesai' ? 'bg-green-500' : 'bg-gray-300'"></div>
+                                    <div class="w-2 h-2 rounded-full mt-2 mr-3 {{ $item->status === 'selesai' ? 'bg-green-500' : 'bg-gray-300' }}"></div>
                                     <div>
                                         <p class="font-medium text-gray-900">Selesai</p>
-                                        @if($item->status === 'selesai' && $item->tanggal_tanggapan)
-                                        <p class="text-sm text-gray-500">{{ $item->tanggal_tanggapan->format('d M Y H:i') }}</p>
+                                        @if($item->status === 'selesai')
+                                            <p class="text-sm text-gray-500">
+                                                {{ ($item->tanggal_tanggapan ?? $item->updated_at ?? $item->created_at)->format('d M Y H:i') }}
+                                            </p>
                                         @endif
                                     </div>
                                 </div>
+
+                                
+
+                                <!-- Diproses -->
                                 <div class="flex items-start">
-                                    <div class="w-2 h-2 rounded-full mt-2 mr-3" 
-                                         :class="['proses', 'selesai'].includes('{{ $item->status }}') ? 'bg-blue-500' : 'bg-gray-300'"></div>
+                                    @php $inProcess = in_array($item->status, ['proses','selesai']); @endphp
+                                    <div class="w-2 h-2 rounded-full mt-2 mr-3 {{ $inProcess ? 'bg-blue-500' : 'bg-gray-300' }}"></div>
                                     <div>
                                         <p class="font-medium text-gray-900">Diproses</p>
+                                        @if($item->status === 'proses')
+                                            <p class="text-sm text-gray-500">{{ ($item->updated_at ?? $item->created_at)->format('d M Y H:i') }}</p>
+                                        @endif
                                     </div>
                                 </div>
+
+                                <!-- Diterima -->
                                 <div class="flex items-start">
                                     <div class="w-2 h-2 rounded-full bg-yellow-500 mt-2 mr-3"></div>
                                     <div>
