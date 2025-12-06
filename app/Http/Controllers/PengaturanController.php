@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengaturan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Support\ImageCompressor;
 
 class PengaturanController extends Controller
 {
@@ -28,8 +29,8 @@ class PengaturanController extends Controller
                         Storage::disk('public')->delete($pengaturan->nilai);
                     }
 
-                    // Upload gambar baru ke storage/app/public/pengaturan/
-                    $nilai = $request->file($kunci)->store('pengaturan', 'public');
+                    // Upload + compress gambar baru ke storage/app/public/pengaturan/
+                    $nilai = ImageCompressor::compressAndStore($request->file($kunci), 'pengaturan', 2 * 1024 * 1024);
                 } elseif ($pengaturan->tipe === 'image' && empty($nilai)) {
                     // Jika tipe image tapi tidak ada upload, skip (jangan update)
                     continue;

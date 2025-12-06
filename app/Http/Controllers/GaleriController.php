@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Galeri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Support\ImageCompressor;
 
 class GaleriController extends Controller
 {
@@ -38,16 +39,17 @@ class GaleriController extends Controller
         $validated = $request->validate([
             'judul' => 'required|max:255',
             'deskripsi' => 'nullable',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            // Allow larger uploads (e.g., up to 8MB); we'll compress to ~2MB on store
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,webp|max:8192',
             'tampilkan' => 'boolean',
             'urutan' => 'nullable|integer',
         ]);
 
         $validated['tampilkan'] = $request->has('tampilkan');
 
-        // Upload gambar ke storage/app/public/galeri/
+        // Upload + compress gambar ke storage/app/public/galeri/
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+            $validated['gambar'] = ImageCompressor::compressAndStore($request->file('gambar'), 'galeri', 2 * 1024 * 1024);
         }
 
         Galeri::create($validated);
@@ -66,7 +68,8 @@ class GaleriController extends Controller
         $validated = $request->validate([
             'judul' => 'required|max:255',
             'deskripsi' => 'nullable',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            // Allow larger uploads (e.g., up to 8MB); we'll compress to ~2MB on store
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:8192',
             'tampilkan' => 'boolean',
             'urutan' => 'nullable|integer',
         ]);
@@ -77,7 +80,7 @@ class GaleriController extends Controller
             if ($galeri->gambar) {
                 Storage::disk('public')->delete($galeri->gambar);
             }
-            $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+            $validated['gambar'] = ImageCompressor::compressAndStore($request->file('gambar'), 'galeri', 2 * 1024 * 1024);
         }
 
         $galeri->update($validated);

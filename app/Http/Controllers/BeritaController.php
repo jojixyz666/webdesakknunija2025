@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Support\ImageCompressor;
 
 class BeritaController extends Controller
 {
@@ -54,7 +55,8 @@ class BeritaController extends Controller
             'judul' => 'required|max:255',
             'konten' => 'required',
             'kategori' => 'required|in:berita,pengumuman',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            // Allow larger uploads (e.g., up to 8MB); we'll compress to ~2MB on store
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:8192',
             'tampilkan' => 'boolean',
             'tanggal_publikasi' => 'nullable|date',
         ]);
@@ -62,9 +64,9 @@ class BeritaController extends Controller
         $validated['user_id'] = auth()->id();
         $validated['tampilkan'] = $request->has('tampilkan');
 
-        // Upload gambar ke storage/app/public/berita/
+        // Upload + compress gambar ke storage/app/public/berita/
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('berita', 'public');
+            $validated['gambar'] = ImageCompressor::compressAndStore($request->file('gambar'), 'berita', 2 * 1024 * 1024);
         }
 
         Berita::create($validated);
@@ -84,7 +86,8 @@ class BeritaController extends Controller
             'judul' => 'required|max:255',
             'konten' => 'required',
             'kategori' => 'required|in:berita,pengumuman',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            // Allow larger uploads (e.g., up to 8MB); we'll compress to ~2MB on store
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:8192',
             'tampilkan' => 'boolean',
             'tanggal_publikasi' => 'nullable|date',
         ]);
@@ -97,7 +100,7 @@ class BeritaController extends Controller
             if ($berita->gambar) {
                 Storage::disk('public')->delete($berita->gambar);
             }
-            $validated['gambar'] = $request->file('gambar')->store('berita', 'public');
+            $validated['gambar'] = ImageCompressor::compressAndStore($request->file('gambar'), 'berita', 2 * 1024 * 1024);
         }
 
         $berita->update($validated);
