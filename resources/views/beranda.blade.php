@@ -76,128 +76,72 @@
                 $jumlahRW = intval($pengaturan['jumlah_rw'] ?? 0);
             @endphp
             
-                        <div class="stat-card" 
-                                 x-data="{ 
-                                        target: {{ $jumlahPenduduk }},
-                                        animated: 0,
-                                        duration: 1500,
-                                        started: false,
-                                        start(){
-                                            if(this.started) return; this.started = true;
-                                            const startTime = performance.now();
-                                            const animate = (now)=>{
-                                                const progress = Math.min((now - startTime) / this.duration, 1);
-                                                const ease = 1 - Math.pow(1 - progress, 3);
-                                                this.animated = Math.floor(this.target * ease);
-                                                if(progress < 1){ requestAnimationFrame(animate); } else { this.animated = this.target; }
-                                            };
-                                            requestAnimationFrame(animate);
-                                        }
-                                 }" 
-                                 x-init="start()">
+            <div class="stat-card" 
+                 x-data="{ 
+                    count: {{ $jumlahPenduduk }}, 
+                    target: {{ $jumlahPenduduk }}
+                 }">
                 <div class="stat-icon bg-blue-100 text-blue-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                     <div class="ml-4">
                         <div class="text-3xl font-bold text-blue-700 leading-none">
-                            <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahPenduduk) }}</span>
+                            <span x-text="Math.floor(count).toLocaleString('id-ID')">{{ number_format($jumlahPenduduk) }}</span>
                         </div>
                         <div class="text-sm font-medium text-blue-600 mt-1">Penduduk</div>
                     </div>
                 </div>
             </div>
 
-                        <div class="stat-card" 
-                                 x-data="{ 
-                                        target: {{ $jumlahKK }},
-                                        animated: 0,
-                                        duration: 1500,
-                                        started: false,
-                                        start(){
-                                            if(this.started) return; this.started = true;
-                                            const startTime = performance.now();
-                                            const animate = (now)=>{
-                                                const progress = Math.min((now - startTime) / this.duration, 1);
-                                                const ease = 1 - Math.pow(1 - progress, 3);
-                                                this.animated = Math.floor(this.target * ease);
-                                                if(progress < 1){ requestAnimationFrame(animate); } else { this.animated = this.target; }
-                                            };
-                                            requestAnimationFrame(animate);
-                                        }
-                                 }" 
-                                 x-init="start()">
+            <div class="stat-card" 
+                 x-data="{ 
+                    count: {{ $jumlahKK }}, 
+                    target: {{ $jumlahKK }}
+                 }">
                 <div class="stat-icon bg-green-100 text-green-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                     </svg>
                     <div class="ml-4">
                         <div class="text-3xl font-bold text-green-700 leading-none">
-                            <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahKK) }}</span>
+                            <span x-text="Math.floor(count).toLocaleString('id-ID')">{{ number_format($jumlahKK) }}</span>
                         </div>
                         <div class="text-sm font-medium text-green-600 mt-1">Kepala Keluarga</div>
                     </div>
                 </div>
             </div>
 
-                        <div class="stat-card" 
-                                 x-data="{ 
-                                        target: {{ $jumlahRT }},
-                                        animated: 0,
-                                        duration: 1500,
-                                        started: false,
-                                        start(){
-                                            if(this.started) return; this.started = true;
-                                            const startTime = performance.now();
-                                            const animate = (now)=>{
-                                                const progress = Math.min((now - startTime) / this.duration, 1);
-                                                const ease = 1 - Math.pow(1 - progress, 3);
-                                                this.animated = Math.floor(this.target * ease);
-                                                if(progress < 1){ requestAnimationFrame(animate); } else { this.animated = this.target; }
-                                            };
-                                            requestAnimationFrame(animate);
-                                        }
-                                 }" 
-                                 x-init="start()">
+            <div class="stat-card" 
+                 x-data="{ 
+                    count: {{ $jumlahRT }}, 
+                    target: {{ $jumlahRT }}
+                 }">
                 <div class="stat-icon bg-purple-100 text-purple-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                     </svg>
                     <div class="ml-4">
                         <div class="text-3xl font-bold text-purple-700 leading-none">
-                            <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahRT) }}</span>
+                            <span x-text="Math.floor(count).toLocaleString('id-ID')">{{ number_format($jumlahRT) }}</span>
                         </div>
                         <div class="text-sm font-medium text-purple-600 mt-1">RT</div>
                     </div>
                 </div>
             </div>
 
-                        <div class="stat-card" 
-                                 x-data="{ 
-                                        target: {{ $jumlahRW }},
-                                        animated: 0,
-                                        duration: 1500,
-                                        started: false,
-                                        start(){
-                                            if(this.started) return; this.started = true;
-                                            const startTime = performance.now();
-                                            const animate = (now)=>{
-                                                const progress = Math.min((now - startTime) / this.duration, 1);
-                                                const ease = 1 - Math.pow(1 - progress, 3);
-                                                this.animated = Math.floor(this.target * ease);
-                                                if(progress < 1){ requestAnimationFrame(animate); } else { this.animated = this.target; }
-                                            };
-                                            requestAnimationFrame(animate);
-                                        }
-                                 }" 
-                                 x-init="start()">
+            <div class="stat-card" 
+                 x-data="{ 
+                    count: {{ $jumlahRW }}, 
+                    target: {{ $jumlahRW }}
+                 }">
                 <div class="stat-icon bg-orange-100 text-orange-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
                     </svg>
                     <div class="ml-4">
                         <div class="text-3xl font-bold text-orange-700 leading-none">
-                            <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahRW) }}</span>
+                            <span x-text="Math.floor(count).toLocaleString('id-ID')">{{ number_format($jumlahRW) }}</span>
                         </div>
                         <div class="text-sm font-medium text-orange-600 mt-1">RW</div>
                     </div>
@@ -253,7 +197,7 @@
         @if($beritaTerbaru->count() > 0)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($beritaTerbaru as $berita)
-            <article class="card group" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+            <article class="card group border border-gray-200 hover:border-gray-300 rounded-xl shadow-sm hover:shadow-xl transition-all" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
                 <a href="{{ route('berita.show', $berita->slug) }}">
                     <div class="relative h-48 overflow-hidden rounded-t-xl">
                         <img src="{{ $berita->gambar_url }}" 
@@ -394,7 +338,8 @@
     }
 
     .card {
-        @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300;
+        @apply bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300;
+        @apply hover:border-gray-300 hover:shadow-xl;
     }
 
     .btn-primary {
