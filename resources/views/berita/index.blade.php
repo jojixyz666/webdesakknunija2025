@@ -17,7 +17,7 @@
         @if($berita->count() > 0)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($berita as $item)
-            <article class="card group" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+            <article class="card group border border-gray-200 hover:border-gray-300 rounded-xl shadow-sm hover:shadow-xl transition-all" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
                 <a href="{{ route('berita.show', $item->slug) }}">
                     <div class="relative h-56 overflow-hidden rounded-t-xl">
                         <img src="{{ $item->gambar_url }}" 
@@ -80,7 +80,7 @@
 
 <style>
     .card {
-        @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300;
+        @apply bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300;
     }
     .line-clamp-2 {
         display: -webkit-box;
