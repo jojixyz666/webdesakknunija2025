@@ -13,12 +13,30 @@ use App\Http\Controllers\AuthController;
 // Public Routes
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
-// Authentication Routes
+// Authentication Routes (admin login at /admin/login)
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/admin/login', [AuthController::class, 'login']);
 });
+
+// Accessible redirect for /login regardless of session
+Route::get('/login', function () {
+    return auth()->check()
+        ? redirect()->route('admin.dashboard')
+        : redirect()->route('login'); // points to /admin/login
+});
+// Keep POST /login redirecting to /admin/login for non-JS clients
+Route::post('/login', function () {
+    return redirect()->route('login');
+})->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Convenience: /admin redirects to dashboard or login
+Route::get('/admin', function () {
+    return auth()->check()
+        ? redirect()->route('admin.dashboard')
+        : redirect()->route('login');
+})->name('admin.home');
 
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
