@@ -13,6 +13,9 @@ class AuthController extends Controller
      */
     public function showLogin()
     {
+        if (auth()->check()) {
+            return redirect()->route('admin.dashboard');
+        }
         return view('auth.login');
     }
 
