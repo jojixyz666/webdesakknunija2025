@@ -55,6 +55,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     
     // Berita Management
+    // Normalize resource parameter name to 'berita' instead of framework-inflected 'beritum'
+    Route::resourceParameters([
+        'berita' => 'berita',
+    ]);
     Route::resource('berita', BeritaController::class)->except(['index', 'show']);
     Route::get('/berita', [BeritaController::class, 'adminIndex'])->name('berita.index');
     

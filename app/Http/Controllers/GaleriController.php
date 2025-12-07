@@ -11,18 +11,25 @@ class GaleriController extends Controller
     public function index()
     {
         $galeri = Galeri::where('tampilkan', true)
-            ->orderBy('urutan')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('galeri.index', compact('galeri'));
+        // Ambil gambar dari berita yang ditampilkan
+        $beritaDenganGambar = \App\Models\Berita::whereNotNull('gambar')
+            ->where('tampilkan', true)
+            ->orderBy('tanggal_publikasi', 'desc')
+            ->get(['judul', 'slug', 'gambar', 'created_at']);
+
+        return view('galeri.index', [
+            'galeri' => $galeri,
+            'beritaGambar' => $beritaDenganGambar,
+        ]);
     }
 
     // Admin Methods
     public function adminIndex()
     {
-        $galeri = Galeri::orderBy('urutan')
-            ->orderBy('created_at', 'desc')
+        $galeri = Galeri::orderBy('created_at', 'desc')
             ->paginate(15);
 
         return view('admin.galeri.index', compact('galeri'));
@@ -40,7 +47,6 @@ class GaleriController extends Controller
             'deskripsi' => 'nullable',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tampilkan' => 'boolean',
-            'urutan' => 'nullable|integer',
         ]);
 
         $validated['tampilkan'] = $request->has('tampilkan');
@@ -68,7 +74,6 @@ class GaleriController extends Controller
             'deskripsi' => 'nullable',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tampilkan' => 'boolean',
-            'urutan' => 'nullable|integer',
         ]);
 
         $validated['tampilkan'] = $request->has('tampilkan');

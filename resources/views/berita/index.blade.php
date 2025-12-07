@@ -22,13 +22,19 @@
                     <div class="relative h-56 overflow-hidden rounded-t-xl">
                         <img src="{{ $item->gambar_url }}" 
                              alt="{{ $item->judul }}"
-                             class="w-full h-full object-cover transition-transform duration-500"
-                             :class="hover ? 'scale-110' : 'scale-100'">
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 text-xs font-semibold rounded-full" 
-                                  :class="'{{ $item->kategori }}' === 'pengumuman' ? 'bg-yellow-500 text-white' : 'bg-blue-600 text-white'">
-                                {{ ucfirst($item->kategori) }}
-                            </span>
+                             class="w-full h-full object-cover transition-transform duration-500 ease-out"
+                             :class="hover ? 'scale-105' : 'scale-100'">
+                        <div class="absolute top-4 left-4 flex items-center space-x-2">
+                            @if($item->kategori === 'pengumuman')
+                                <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-yellow-500 text-white shadow-sm transition-all duration-300">
+                                    <span class="w-2 h-2 rounded-full bg-white/90 mr-2 animate-pulse"></span>
+                                    Pengumuman
+                                </span>
+                            @else
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-600 text-white shadow-sm transition-colors duration-300">
+                                    {{ ucfirst($item->kategori) }}
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="p-6">
@@ -37,7 +43,7 @@
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
-                                {{ $item->tanggal_publikasi->format('d M Y') }}
+                                {{ $item->tanggal_publikasi->format('d M Y, H:i') }}
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

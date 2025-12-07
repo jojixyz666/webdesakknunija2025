@@ -8,7 +8,7 @@
     <p class="text-gray-600">{{ isset($berita) ? 'Update informasi berita' : 'Buat berita atau pengumuman baru' }}</p>
 </div>
 
-<form action="{{ isset($berita) ? route('admin.berita.update', $berita) : route('admin.berita.store') }}" 
+<form action="{{ isset($berita) ? route('admin.berita.update', ['berita' => $berita->id]) : route('admin.berita.store') }}" 
       method="POST" 
       enctype="multipart/form-data"
       x-data="{ preview: '{{ isset($berita) && $berita->gambar ? $berita->gambar_url : '' }}' }">
