@@ -207,29 +207,30 @@
 @if($pengumumanTerbaru->count() > 0)
 <section class="py-4 bg-yellow-50 border-y border-yellow-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center" x-data="{ currentIndex: 0, announcements: {{ $pengumumanTerbaru->pluck('judul')->toJson() }} }" 
-             x-init="setInterval(() => { currentIndex = (currentIndex + 1) % announcements.length }, 5000)">
+        <div class="flex items-center" x-data="{ currentIndex: 0, total: {{ $pengumumanTerbaru->count() }} }" 
+             x-init="setInterval(() => { if(total>0){ currentIndex = (currentIndex + 1) % total } }, 5000)">
             <div class="flex items-center space-x-3 mr-6">
-                <svg class="w-6 h-6 text-yellow-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                </svg>
-                <span class="font-bold text-yellow-800">PENGUMUMAN:</span>
+                <span class="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-yellow-500 text-white shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-white/90 mr-2 animate-pulse"></span>
+                    Pengumuman
+                </span>
             </div>
             <div class="flex-1 overflow-hidden">
-                <div class="whitespace-nowrap">
+                <div class="relative min-h-[2.5rem] md:min-h-[1.5rem]">
                     @foreach($pengumumanTerbaru as $index => $pengumuman)
-                    <span x-show="currentIndex === {{ $index }}"
-                          x-transition:enter="transition ease-out duration-500"
-                          x-transition:enter-start="opacity-0 transform translate-x-8"
-                          x-transition:enter-end="opacity-100 transform translate-x-0"
-                          x-transition:leave="transition ease-in duration-300"
-                          x-transition:leave-start="opacity-100"
-                          x-transition:leave-end="opacity-0"
-                          class="text-gray-800">
-                        <a href="{{ route('berita.show', $pengumuman->slug) }}" class="hover:text-blue-600">
-                            {{ $pengumuman->judul }}
+                    <div x-show="currentIndex === {{ $index }}"
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 translate-y-2"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"
+                         class="absolute inset-0 flex items-center">
+                        <a href="{{ route('berita.show', $pengumuman->slug) }}?from=beranda" class="text-gray-800 hover:text-blue-600 text-sm md:text-base whitespace-normal md:whitespace-nowrap flex items-center md:justify-between w-full">
+                            <span class="line-clamp-2 md:line-clamp-none pr-2">{{ $pengumuman->judul }}</span>
+                            <span class="text-gray-500 text-xs md:text-sm md:inline md:shrink-0 md:ml-4">{{ $pengumuman->tanggal_publikasi->format('d M Y, H:i') }}</span>
                         </a>
-                    </span>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -250,7 +251,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($beritaTerbaru as $berita)
             <article class="card group border border-gray-200 hover:border-gray-300 rounded-xl shadow-sm hover:shadow-xl transition-all" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
-                <a href="{{ route('berita.show', $berita->slug) }}">
+                <a href="{{ route('berita.show', $berita->slug) }}?from=beranda">
                     <div class="relative h-48 overflow-hidden rounded-t-xl">
                         <img src="{{ $berita->gambar_url }}" 
                              alt="{{ $berita->judul }}"
@@ -395,7 +396,7 @@
     }
 
     .btn-primary {
-        @apply px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-md hover:shadow-lg font-medium inline-flex items-center;
+        @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium inline-flex items-center;
     }
     .btn-secondary {
         @apply px-6 py-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-lg hover:bg-white hover:text-blue-700 transition-all duration-200 font-medium inline-flex items-center;

@@ -7,11 +7,11 @@
 <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-4">
-            <a href="{{ route('berita.index') }}" class="inline-flex items-center text-blue-100 hover:text-white transition">
+            <a href="{{ request('from') === 'beranda' ? route('beranda') : route('berita.index') }}" class="inline-flex items-center text-blue-100 hover:text-white transition">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
-                Kembali ke Berita
+                {{ request('from') === 'beranda' ? 'Kembali ke Beranda' : 'Kembali ke Berita' }}
             </a>
         </div>
         <div class="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4"
@@ -24,7 +24,7 @@
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                {{ $berita->tanggal_publikasi->format('d F Y') }}
+                {{ $berita->tanggal_publikasi->format('d F Y, H:i') }}
             </div>
             <div class="flex items-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
