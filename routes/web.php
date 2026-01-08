@@ -9,6 +9,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ApbdController;
 
 // Public Routes
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
@@ -50,6 +51,9 @@ Route::get('/api/peta/lokasi', [PetaController::class, 'apiLokasi'])->name('api.
 
 Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 
+Route::get('/transparansi', [ApbdController::class, 'index'])->name('apbd.index');
+Route::get('/transparansi/{apbd}/download', [ApbdController::class, 'download'])->name('apbd.download');
+
 // Admin Routes (Protected by auth middleware)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -79,6 +83,14 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Galeri Management
     Route::resource('galeri', GaleriController::class)->except(['index']);
     Route::get('/galeri', [GaleriController::class, 'adminIndex'])->name('galeri.index');
+    
+    // APBD Management
+    Route::get('/apbd', [ApbdController::class, 'adminIndex'])->name('apbd.index');
+    Route::get('/apbd/create', [ApbdController::class, 'create'])->name('apbd.create');
+    Route::post('/apbd', [ApbdController::class, 'store'])->name('apbd.store');
+    Route::get('/apbd/{apbd}/edit', [ApbdController::class, 'edit'])->name('apbd.edit');
+    Route::put('/apbd/{apbd}', [ApbdController::class, 'update'])->name('apbd.update');
+    Route::delete('/apbd/{apbd}', [ApbdController::class, 'destroy'])->name('apbd.destroy');
     
     // Pengaturan
     Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
