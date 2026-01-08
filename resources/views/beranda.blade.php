@@ -305,46 +305,6 @@
     </div>
 </section>
 
-<!-- Galeri -->
-@if($galeri->count() > 0)
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Galeri Desa</h2>
-            <p class="text-gray-600">Dokumentasi kegiatan dan keindahan desa</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            @foreach($galeri as $item)
-            <div class="group relative aspect-square overflow-hidden rounded-xl cursor-pointer" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
-                <img src="{{ $item->gambar_url }}" 
-                     alt="{{ $item->judul }}"
-                     class="w-full h-full object-cover transition-transform duration-500"
-                     :class="hover ? 'scale-110' : 'scale-100'">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 class="text-white font-bold text-lg">{{ $item->judul }}</h4>
-                        @if($item->deskripsi)
-                        <p class="text-white/80 text-sm">{{ Str::limit($item->deskripsi, 60) }}</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <div class="text-center mt-12">
-            <a href="{{ route('galeri.index') }}" class="btn-primary inline-flex">
-                Lihat Semua Foto
-                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
-        </div>
-    </div>
-</section>
-@endif
-
 <!-- CTA Section -->
 <section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
