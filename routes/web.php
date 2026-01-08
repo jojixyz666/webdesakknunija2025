@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApbdController;
+use App\Http\Controllers\ProfileDesaController;
 
 // Public Routes
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
@@ -51,6 +52,8 @@ Route::get('/api/peta/lokasi', [PetaController::class, 'apiLokasi'])->name('api.
 
 Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 
+Route::get('/profile', [ProfileDesaController::class, 'index'])->name('profile.index');
+
 Route::get('/transparansi', [ApbdController::class, 'index'])->name('apbd.index');
 Route::get('/transparansi/{apbd}/download', [ApbdController::class, 'download'])->name('apbd.download');
 
@@ -91,6 +94,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/apbd/{apbd}/edit', [ApbdController::class, 'edit'])->name('apbd.edit');
     Route::put('/apbd/{apbd}', [ApbdController::class, 'update'])->name('apbd.update');
     Route::delete('/apbd/{apbd}', [ApbdController::class, 'destroy'])->name('apbd.destroy');
+    
+    // Profile Desa Management
+    Route::get('/profile', [ProfileDesaController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileDesaController::class, 'update'])->name('profile.update');
     
     // Pengaturan
     Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
