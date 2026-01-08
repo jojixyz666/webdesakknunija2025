@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
-use App\Models\Galeri;
 use App\Models\Pengaturan;
 
 class BerandaController extends Controller
@@ -24,12 +23,6 @@ class BerandaController extends Controller
             ->limit(3)
             ->get();
 
-        // Ambil galeri
-        $galeri = Galeri::where('tampilkan', true)
-            ->orderBy('urutan')
-            ->limit(6)
-            ->get();
-
-        return view('beranda', compact('beritaTerbaru', 'pengumumanTerbaru', 'galeri'));
+        return view('beranda', compact('beritaTerbaru', 'pengumumanTerbaru'));
     }
 }

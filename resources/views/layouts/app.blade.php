@@ -73,13 +73,6 @@
                         <span>Peta Desa</span>
                         <span class="indicator"></span>
                     </a>
-                    <a href="{{ route('galeri.index') }}" class="nav-link {{ request()->routeIs('galeri.*') ? 'active' : '' }}">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-                        <span>Galeri</span>
-                        <span class="indicator"></span>
-                    </a>
                     <a href="{{ route('apbd.index') }}" class="nav-link {{ request()->routeIs('apbd.*') ? 'active' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -147,14 +140,6 @@
                     </svg>
                     <span>Peta Desa</span>
                 </a>
-                <a href="{{ route('galeri.index') }}" 
-                   @click="open = false"
-                   class="mobile-nav-link {{ request()->routeIs('galeri.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                    <span>Galeri</span>
-                </a>
                 <a href="{{ route('apbd.index') }}" 
                    @click="open = false"
                    class="mobile-nav-link {{ request()->routeIs('apbd.*') ? 'active' : '' }}">
@@ -213,8 +198,9 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('beranda') }}" class="hover:text-white transition">Beranda</a></li>
                         <li><a href="{{ route('berita.index') }}" class="hover:text-white transition">Berita</a></li>
+                        <li><a href="{{ route('profile.index') }}" class="hover:text-white transition">Profile Desa</a></li>
                         <li><a href="{{ route('peta.index') }}" class="hover:text-white transition">Peta Desa</a></li>
-                        <li><a href="{{ route('galeri.index') }}" class="hover:text-white transition">Galeri</a></li>
+                        <li><a href="{{ route('apbd.index') }}" class="hover:text-white transition">Transparansi</a></li>
                         <li><a href="{{ route('pengaduan.index') }}" class="hover:text-white transition">Pengaduan</a></li>
                     </ul>
                 </div>

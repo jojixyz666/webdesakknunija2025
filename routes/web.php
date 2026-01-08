@@ -5,7 +5,6 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PetaController;
-use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\AuthController;
@@ -50,8 +49,6 @@ Route::get('/pengaduan/lacak', [PengaduanController::class, 'track'])->name('pen
 Route::get('/peta', [PetaController::class, 'index'])->name('peta.index');
 Route::get('/api/peta/lokasi', [PetaController::class, 'apiLokasi'])->name('api.peta.lokasi');
 
-Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
-
 Route::get('/profile', [ProfileDesaController::class, 'index'])->name('profile.index');
 
 Route::get('/transparansi', [ApbdController::class, 'index'])->name('apbd.index');
@@ -82,10 +79,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/peta/{peta}/edit', [PetaController::class, 'edit'])->name('peta.edit');
     Route::put('/peta/{peta}', [PetaController::class, 'update'])->name('peta.update');
     Route::delete('/peta/{peta}', [PetaController::class, 'destroy'])->name('peta.destroy');
-    
-    // Galeri Management
-    Route::resource('galeri', GaleriController::class)->except(['index']);
-    Route::get('/galeri', [GaleriController::class, 'adminIndex'])->name('galeri.index');
     
     // APBD Management
     Route::get('/apbd', [ApbdController::class, 'adminIndex'])->name('apbd.index');
