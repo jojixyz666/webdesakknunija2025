@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // Run pengaturan seeder
         $this->call([
             PengaturanSeeder::class,
+            WargaSeeder::class,
         ]);
     }
 }

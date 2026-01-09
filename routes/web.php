@@ -10,6 +10,8 @@ use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApbdController;
 use App\Http\Controllers\ProfileDesaController;
+use App\Http\Controllers\DataGrafisController;
+use App\Http\Controllers\WargaController;
 
 // Public Routes
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
@@ -54,6 +56,8 @@ Route::get('/profile', [ProfileDesaController::class, 'index'])->name('profile.i
 Route::get('/transparansi', [ApbdController::class, 'index'])->name('apbd.index');
 Route::get('/transparansi/{apbd}/download', [ApbdController::class, 'download'])->name('apbd.download');
 
+Route::get('/data-grafis', [DataGrafisController::class, 'index'])->name('data-grafis.index');
+
 // Admin Routes (Protected by auth middleware)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -91,6 +95,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Profile Desa Management
     Route::get('/profile', [ProfileDesaController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileDesaController::class, 'update'])->name('profile.update');
+    
+    // Data Warga Management
+    Route::resource('warga', WargaController::class);
+    
+    // Data Grafis Management - APBDes
+    Route::get('/data-grafis/apbdes', [DataGrafisController::class, 'apbdesIndex'])->name('data-grafis.apbdes.index');
+    Route::get('/data-grafis/apbdes/create', [DataGrafisController::class, 'apbdesCreate'])->name('data-grafis.apbdes.create');
+    Route::post('/data-grafis/apbdes', [DataGrafisController::class, 'apbdesStore'])->name('data-grafis.apbdes.store');
+    Route::get('/data-grafis/apbdes/{dataApbdes}/edit', [DataGrafisController::class, 'apbdesEdit'])->name('data-grafis.apbdes.edit');
+    Route::put('/data-grafis/apbdes/{dataApbdes}', [DataGrafisController::class, 'apbdesUpdate'])->name('data-grafis.apbdes.update');
+    Route::delete('/data-grafis/apbdes/{dataApbdes}', [DataGrafisController::class, 'apbdesDestroy'])->name('data-grafis.apbdes.destroy');
     
     // Pengaturan
     Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
