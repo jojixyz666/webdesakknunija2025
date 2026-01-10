@@ -31,7 +31,7 @@
                         @if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa']))
                         <img src="{{ asset('storage/' . $pengaturan['logo_desa']) }}" alt="Logo" class="h-10 w-10 object-cover rounded-lg ring-1 ring-gray-200">
                         @else
-                        <div class="h-10 w-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center ring-1 ring-blue-300/40">
+                        <div class="h-10 w-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center ring-1 ring-green-300/40">
                             <span class="text-white font-bold text-lg">{{ substr($pengaturan['nama_desa'] ?? 'D', 0, 1) }}</span>
                         </div>
                         @endif
@@ -78,7 +78,7 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
-                        <span>Transparansi</span>
+                        <span>Dokumen</span>
                         <span class="indicator"></span>
                     </a>
                     <a href="{{ route('data-grafis.index') }}" class="nav-link {{ request()->routeIs('data-grafis.*') ? 'active' : '' }}">
@@ -88,7 +88,7 @@
                         <span>Data Grafis</span>
                         <span class="indicator"></span>
                     </a>
-                    <a href="{{ route('pengaduan.index') }}" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium">
+                    <a href="{{ route('pengaduan.index') }}" class="px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium">
                         Pengaduan
                     </a>
                 </div>
@@ -166,7 +166,7 @@
                 </a>
                 <a href="{{ route('pengaduan.index') }}" 
                    @click="open = false"
-                   class="flex items-center space-x-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 font-medium shadow-md">
+                   class="flex items-center space-x-2 px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 font-medium shadow-md">
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
                     </svg>
@@ -199,13 +199,13 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300">
+    <footer class="bg-gradient-to-br from-green-900 to-green-800 text-green-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- About -->
                 <div>
                     <h3 class="text-white text-lg font-bold mb-4">{{ $pengaturan['nama_desa'] ?? 'Desa' }}</h3>
-                    <p class="text-sm mb-4">{{ $pengaturan['deskripsi_singkat'] ?? 'Website resmi desa untuk informasi dan layanan masyarakat.' }}</p>
+                    <p class="text-sm mb-4 text-green-100">{{ $pengaturan['deskripsi_singkat'] ?? 'Website resmi desa untuk informasi dan layanan masyarakat.' }}</p>
                 </div>
 
                 <!-- Quick Links -->
@@ -226,30 +226,30 @@
                     <h3 class="text-white text-lg font-bold mb-4">Kontak</h3>
                     <ul class="space-y-2 text-sm">
                         <li class="flex items-start">
-                            <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 mr-2 mt-0.5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
-                            {{ $pengaturan['alamat'] ?? 'Alamat Kantor Desa' }}
+                            <span class="text-green-100">{{ $pengaturan['alamat'] ?? 'Alamat Kantor Desa' }}</span>
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 mr-2 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                             </svg>
-                            {{ $pengaturan['telepon'] ?? '-' }}
+                            <span class="text-green-100">{{ $pengaturan['telepon'] ?? '-' }}</span>
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 mr-2 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
-                            {{ $pengaturan['email'] ?? '-' }}
+                            <span class="text-green-100">{{ $pengaturan['email'] ?? '-' }}</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                <p>&copy; {{ date('Y') }} {{ $pengaturan['nama_desa'] ?? 'Desa' }}. Powered by Laravel & Tailwind CSS.</p>
+            <div class="border-t border-green-700 mt-8 pt-8 text-center text-sm">
+                <p class="text-green-100">&copy; {{ date('Y') }} {{ $pengaturan['nama_desa'] ?? 'Desa' }}. Powered by Laravel & Tailwind CSS.</p>
             </div>
         </div>
     </footer>
@@ -271,8 +271,8 @@
             outline: none;
         }
         .nav-link:hover { 
-            color: #1d4ed8; /* blue-700 */
-            background-color: #eff6ff; /* blue-50 */
+            color: #15803d; /* green-700 */
+            background-color: #f0fdf4; /* green-50 */
         }
         .nav-link .indicator {
             position: absolute;
@@ -280,14 +280,14 @@
             left: 10px;
             height: 2px;
             width: 0;
-            background: linear-gradient(90deg, #2563eb, #1e40af);
+            background: linear-gradient(90deg, #16a34a, #15803d);
             border-radius: 9999px;
             transition: width 250ms ease;
         }
         .nav-link:hover .indicator { width: calc(100% - 20px); }
         .nav-link.active {
-            color: #1d4ed8;
-            background-color: #dbeafe; /* blue-100 */
+            color: #15803d;
+            background-color: #dcfce7; /* green-100 */
         }
         .nav-link.active .indicator { width: calc(100% - 20px); }
         /* Reduce motion for users who prefer it */
@@ -295,10 +295,10 @@
             .nav-link, .nav-link .indicator { transition: none; }
         }
         .mobile-nav-link {
-            @apply flex items-center space-x-2 px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300 font-medium;
+            @apply flex items-center space-x-2 px-4 py-3 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-700 transition-all duration-300 font-medium;
         }
         .mobile-nav-link.active {
-            @apply bg-blue-100 text-blue-700;
+            @apply bg-green-100 text-green-700;
         }
     </style>
     

@@ -26,7 +26,7 @@
                            value="{{ old('tahun', date('Y')) }}"
                            min="2000" 
                            max="2100"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                            required>
                     @error('tahun')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -40,7 +40,7 @@
                     </label>
                     <select name="kategori" 
                             id="kategori" 
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                             required>
                         <option value="">-- Pilih Kategori --</option>
                         <option value="Pendapatan" {{ old('kategori') == 'Pendapatan' ? 'selected' : '' }}>Pendapatan</option>
@@ -63,7 +63,7 @@
                            id="jenis" 
                            value="{{ old('jenis') }}"
                            placeholder="Contoh: Pendapatan Asli Desa, Belanja Pegawai, dll"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                            required>
                     @error('jenis')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -82,7 +82,7 @@
                            min="0"
                            step="0.01"
                            placeholder="0"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                            required>
                     @error('jumlah')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -99,7 +99,7 @@
                            id="urutan" 
                            value="{{ old('urutan', 0) }}"
                            min="0"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                     @error('urutan')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -114,7 +114,7 @@
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Aksi</h3>
                 
                 <button type="submit" 
-                        class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium mb-3">
+                        class="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium mb-3">
                     Simpan Data
                 </button>
                 
@@ -127,13 +127,13 @@
                     <h4 class="font-semibold text-gray-900 mb-3 text-sm">Informasi</h4>
                     <div class="space-y-2 text-xs text-gray-600">
                         <div class="flex items-start">
-                            <svg class="w-4 h-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             <p>Data akan ditampilkan di halaman Data Grafis</p>
                         </div>
                         <div class="flex items-start">
-                            <svg class="w-4 h-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             <p>Pastikan kategori dan jenis sesuai dengan struktur APBDes</p>

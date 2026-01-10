@@ -14,11 +14,11 @@
     -->
     @if(isset($pengaturan['banner_depan']) && $pengaturan['banner_depan'])
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $pengaturan['banner_depan']) }}');">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/60"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-black/30"></div>
     </div>
     @else
     <!-- Default gradient banner jika belum ada gambar -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-green-600 via-green-700 to-green-900"></div>
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-0 -left-4 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-xl animate-blob"></div>
         <div class="absolute top-0 -right-4 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-xl animate-blob animation-delay-2000"></div>
@@ -36,7 +36,7 @@
                     Selamat Datang di<br>
                     <span class="text-yellow-300">{{ $pengaturan['nama_desa'] ?? 'Desa Kami' }}</span>
                 </h1>
-                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                <p class="text-xl text-green-100 mb-8 leading-relaxed">
                     {{ $pengaturan['tagline'] ?? 'Portal informasi dan layanan masyarakat yang modern, transparan, dan mudah diakses.' }}
                 </p>
                 <div class="flex flex-wrap gap-4">
@@ -69,12 +69,6 @@
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            @php
-                $jumlahPenduduk = intval($pengaturan['jumlah_penduduk'] ?? 0);
-                $jumlahKK = intval($pengaturan['jumlah_kk'] ?? 0);
-                $jumlahRT = intval($pengaturan['jumlah_rt'] ?? 0);
-                $jumlahRW = intval($pengaturan['jumlah_rw'] ?? 0);
-            @endphp
             
                         <div class="stat-card" 
                                  x-data="{ 
@@ -94,15 +88,15 @@
                                             requestAnimationFrame(animate);
                                         }
                                  }" x-init="start()">
-                <div class="stat-icon bg-blue-100 text-blue-600 flex items-center p-6 rounded-lg">
+                <div class="stat-icon bg-green-100 text-green-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                     <div class="ml-4">
-                        <div class="text-3xl font-bold text-blue-700 leading-none">
+                        <div class="text-3xl font-bold text-green-700 leading-none">
                             <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahPenduduk) }}</span>
                         </div>
-                        <div class="text-sm font-medium text-blue-600 mt-1">Penduduk</div>
+                        <div class="text-sm font-medium text-green-600 mt-1">Penduduk</div>
                     </div>
                 </div>
             </div>
@@ -156,15 +150,15 @@
                                             requestAnimationFrame(animate);
                                         }
                                  }" x-init="start()">
-                <div class="stat-icon bg-purple-100 text-purple-600 flex items-center p-6 rounded-lg">
+                <div class="stat-icon bg-teal-100 text-teal-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                     </svg>
                     <div class="ml-4">
-                        <div class="text-3xl font-bold text-purple-700 leading-none">
+                        <div class="text-3xl font-bold text-teal-700 leading-none">
                             <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahRT) }}</span>
                         </div>
-                        <div class="text-sm font-medium text-purple-600 mt-1">RT</div>
+                        <div class="text-sm font-medium text-teal-600 mt-1">RT</div>
                     </div>
                 </div>
             </div>
@@ -187,15 +181,15 @@
                                             requestAnimationFrame(animate);
                                         }
                                  }" x-init="start()">
-                <div class="stat-icon bg-orange-100 text-orange-600 flex items-center p-6 rounded-lg">
+                <div class="stat-icon bg-cyan-100 text-cyan-600 flex items-center p-6 rounded-lg">
                     <svg class="w-10 h-10 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
                     </svg>
                     <div class="ml-4">
-                        <div class="text-3xl font-bold text-orange-700 leading-none">
+                        <div class="text-3xl font-bold text-cyan-700 leading-none">
                             <span x-text="Number(animated).toLocaleString('id-ID')">{{ number_format($jumlahRW) }}</span>
                         </div>
-                        <div class="text-sm font-medium text-orange-600 mt-1">RW</div>
+                        <div class="text-sm font-medium text-cyan-600 mt-1">RW</div>
                     </div>
                 </div>
             </div>
@@ -226,7 +220,7 @@
                          x-transition:leave-start="opacity-100"
                          x-transition:leave-end="opacity-0"
                          class="absolute inset-0 flex items-center">
-                        <a href="{{ route('berita.show', $pengumuman->slug) }}?from=beranda" class="text-gray-800 hover:text-blue-600 text-sm md:text-base whitespace-normal md:whitespace-nowrap flex items-center md:justify-between w-full">
+                        <a href="{{ route('berita.show', $pengumuman->slug) }}?from=beranda" class="text-gray-800 hover:text-green-600 text-sm md:text-base whitespace-normal md:whitespace-nowrap flex items-center md:justify-between w-full">
                             <span class="line-clamp-2 md:line-clamp-none pr-2">{{ $pengumuman->judul }}</span>
                             <span class="text-gray-500 text-xs md:text-sm md:inline md:shrink-0 md:ml-4">{{ $pengumuman->tanggal_publikasi->format('d M Y, H:i') }}</span>
                         </a>
@@ -258,7 +252,7 @@
                              class="w-full h-full object-cover transition-transform duration-500"
                              :class="hover ? 'scale-110' : 'scale-100'">
                         <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full">
+                            <span class="px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded-full">
                                 {{ ucfirst($berita->kategori) }}
                             </span>
                         </div>
@@ -270,11 +264,11 @@
                             </svg>
                             {{ $berita->tanggal_publikasi->format('d M Y') }}
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
                             {{ $berita->judul }}
                         </h3>
                         <p class="text-gray-600 mb-4 line-clamp-3">{{ $berita->kutipan }}</p>
-                        <div class="flex items-center text-blue-600 font-medium">
+                        <div class="flex items-center text-green-600 font-medium">
                             <span>Baca Selengkapnya</span>
                             <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -306,10 +300,10 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+<section class="py-16 bg-gradient-to-r from-green-600 to-green-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Ada Keluhan atau Aspirasi?</h2>
-        <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+        <p class="text-green-100 text-lg mb-8 max-w-2xl mx-auto">
             Sampaikan pengaduan, saran, atau aspirasi Anda. Kami siap mendengarkan dan menindaklanjuti.
         </p>
         <a href="{{ route('pengaduan.index') }}" class="btn-secondary inline-flex">
@@ -356,10 +350,10 @@
     }
 
     .btn-primary {
-        @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium inline-flex items-center;
+        @apply px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium inline-flex items-center;
     }
     .btn-secondary {
-        @apply px-6 py-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-lg hover:bg-white hover:text-blue-700 transition-all duration-200 font-medium inline-flex items-center;
+        @apply px-6 py-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white rounded-lg hover:bg-white hover:text-green-700 transition-all duration-200 font-medium inline-flex items-center;
     }
 
     .line-clamp-2 {

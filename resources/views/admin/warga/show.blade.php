@@ -9,7 +9,7 @@
         <p class="text-gray-600 mt-1">Informasi lengkap penduduk</p>
     </div>
     <div class="flex space-x-2">
-        <a href="{{ route('admin.warga.edit', $warga) }}" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center">
+        <a href="{{ route('admin.warga.edit', $warga) }}" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
             </svg>
@@ -26,7 +26,7 @@
     <div class="lg:col-span-1">
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="text-center mb-6">
-                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center mb-4">
+                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-4">
                     <span class="text-5xl font-bold text-white">{{ strtoupper(substr($warga->nama, 0, 1)) }}</span>
                 </div>
                 <h2 class="text-xl font-bold text-gray-900">{{ $warga->nama }}</h2>
@@ -50,7 +50,7 @@
                 </div>
                 @if($warga->wajib_pilih)
                 <div>
-                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full">
+                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 text-sm font-semibold rounded-full">
                         <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>

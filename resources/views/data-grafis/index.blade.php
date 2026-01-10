@@ -8,7 +8,7 @@
 
 @section('content')
 <!-- Header Section -->
-<section class="bg-gradient-to-r from-indigo-600 to-indigo-800 py-20">
+<section class="bg-gradient-to-r from-green-600 to-green-800 py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
@@ -19,7 +19,7 @@
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
                 Data Grafis Desa
             </h1>
-            <p class="text-xl text-indigo-100 max-w-3xl mx-auto">
+            <p class="text-xl text-green-100 max-w-3xl mx-auto">
                 Visualisasi data dan informasi {{ $pengaturan['nama_desa'] ?? 'desa' }}
             </p>
         </div>
@@ -31,7 +31,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex space-x-8 overflow-x-auto">
             <button @click="activeTab = 'penduduk'" 
-                    :class="activeTab === 'penduduk' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                    :class="activeTab === 'penduduk' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
                     class="py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors">
                 <div class="flex items-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,7 @@
                 </div>
             </button>
             <button @click="activeTab = 'apbdes'" 
-                    :class="activeTab === 'apbdes' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                    :class="activeTab === 'apbdes' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
                     class="py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap transition-colors">
                 <div class="flex items-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,37 +69,37 @@
             @else
             <!-- Statistik Ringkasan -->
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-md p-6 text-white">
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-md p-6 text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-blue-100 text-sm mb-1">Total Penduduk</p>
+                            <p class="text-green-100 text-sm mb-1">Total Penduduk</p>
                             <p class="text-3xl font-bold">{{ number_format($totalPenduduk) }}</p>
                         </div>
-                        <svg class="w-12 h-12 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-md p-6 text-white">
+                <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg shadow-md p-6 text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-green-100 text-sm mb-1">Kepala Keluarga</p>
+                            <p class="text-emerald-100 text-sm mb-1">Kepala Keluarga</p>
                             <p class="text-3xl font-bold">{{ number_format($totalKepalaKeluarga) }}</p>
                         </div>
-                        <svg class="w-12 h-12 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                         </svg>
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg shadow-md p-6 text-white">
+                <div class="bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg shadow-md p-6 text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-indigo-100 text-sm mb-1">Laki-laki</p>
+                            <p class="text-teal-100 text-sm mb-1">Laki-laki</p>
                             <p class="text-3xl font-bold">{{ number_format($totalLakiLaki) }}</p>
                         </div>
-                        <svg class="w-12 h-12 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
                     </div>
@@ -117,13 +117,13 @@
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-md p-6 text-white">
+                <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg shadow-md p-6 text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-purple-100 text-sm mb-1">Wajib Pilih</p>
+                            <p class="text-cyan-100 text-sm mb-1">Wajib Pilih</p>
                             <p class="text-3xl font-bold">{{ number_format($totalWajibPilih) }}</p>
                         </div>
-                        <svg class="w-12 h-12 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-12 h-12 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
@@ -134,9 +134,9 @@
             <div class="space-y-8">
                 <!-- Chart Kelompok Umur -->
                 <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 p-6 text-white">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 p-6 text-white">
                         <h3 class="text-xl font-bold mb-2">Distribusi Penduduk Berdasarkan Kelompok Umur</h3>
-                        <p class="text-indigo-100 text-sm">Grafik menampilkan jumlah penduduk dalam setiap kelompok rentang usia. Data ini berguna untuk analisis demografi dan perencanaan program berbasis usia.</p>
+                        <p class="text-green-100 text-sm">Grafik menampilkan jumlah penduduk dalam setiap kelompok rentang usia. Data ini berguna untuk analisis demografi dan perencanaan program berbasis usia.</p>
                     </div>
                     <div class="p-6">
                         <canvas id="chartKelompokUmur" height="80"></canvas>
@@ -145,9 +145,9 @@
                 
                 <!-- Chart Dusun (Pie) -->
                 <div class="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 p-6 text-white">
                         <h3 class="text-xl font-bold mb-2">Sebaran Penduduk Per Dusun</h3>
-                        <p class="text-blue-100 text-sm">Diagram lingkaran menunjukkan proporsi jumlah penduduk di setiap dusun. Memudahkan identifikasi dusun dengan populasi terbesar dan terkecil.</p>
+                        <p class="text-green-100 text-sm">Diagram lingkaran menunjukkan proporsi jumlah penduduk di setiap dusun. Memudahkan identifikasi dusun dengan populasi terbesar dan terkecil.</p>
                     </div>
                     <div class="p-6">
                         <div class="max-w-md mx-auto">
@@ -204,7 +204,7 @@
                     <input type="hidden" name="tab" value="apbdes">
                     <select name="tahun_apbdes" 
                             onchange="this.form.submit()" 
-                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
                         @foreach($tahunApbdes as $tahun)
                         <option value="{{ $tahun }}" {{ $tahunApbdesAktif == $tahun ? 'selected' : '' }}>
                             Tahun {{ $tahun }}
@@ -251,14 +251,14 @@
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-md p-6 text-white">
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-md p-6 text-white">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-blue-100 text-sm mb-1">Pembiayaan Penerimaan</p>
+                            <p class="text-green-100 text-sm mb-1">Pembiayaan Penerimaan</p>
                             <p class="text-2xl font-bold">Rp {{ number_format($totalPembiayaanPenerimaan / 1000000, 1) }}M</p>
-                            <p class="text-xs text-blue-100 mt-1">{{ number_format($totalPembiayaanPenerimaan, 0, ',', '.') }}</p>
+                            <p class="text-xs text-green-100 mt-1">{{ number_format($totalPembiayaanPenerimaan, 0, ',', '.') }}</p>
                         </div>
-                        <svg class="w-10 h-10 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-10 h-10 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"/>
                         </svg>
                     </div>
@@ -306,17 +306,17 @@
                         <div>
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-gray-700 text-sm">{{ $item->jenis }}</span>
-                                <span class="font-semibold text-indigo-600">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</span>
+                                <span class="font-semibold text-green-600">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2">
-                                <div class="bg-indigo-600 h-2 rounded-full" style="width: {{ $total > 0 ? ($item->jumlah / $total) * 100 : 0 }}%"></div>
+                                <div class="bg-green-600 h-2 rounded-full" style="width: {{ $total > 0 ? ($item->jumlah / $total) * 100 : 0 }}%"></div>
                             </div>
                         </div>
                         @endforeach
                         <div class="pt-3 border-t border-gray-200">
                             <div class="flex justify-between items-center">
                                 <span class="font-semibold text-gray-900">Total {{ $kategori }}</span>
-                                <span class="font-bold text-lg text-indigo-600">Rp {{ number_format($total, 0, ',', '.') }}</span>
+                                <span class="font-bold text-lg text-green-600">Rp {{ number_format($total, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>

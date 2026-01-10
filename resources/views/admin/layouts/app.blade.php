@@ -143,7 +143,7 @@
                             <p class="text-sm font-medium text-gray-900">{{ auth()->user()->name }}</p>
                             <p class="text-xs text-gray-500">{{ auth()->user()->email }}</p>
                         </div>
-                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white font-bold">
                             {{ substr(auth()->user()->name, 0, 1) }}
                         </div>
                     </div>
@@ -209,7 +209,7 @@
             @apply flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors duration-200;
         }
         .sidebar-link.active {
-            @apply bg-blue-600 text-white;
+            @apply bg-green-600 text-white;
         }
     </style>
 </body>

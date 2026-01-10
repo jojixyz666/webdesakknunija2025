@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\Pengaturan;
+use App\Models\Warga;
+use Illuminate\Support\Facades\DB;
 
 class BerandaController extends Controller
 {
@@ -23,6 +25,21 @@ class BerandaController extends Controller
             ->limit(3)
             ->get();
 
-        return view('beranda', compact('beritaTerbaru', 'pengumumanTerbaru'));
+        // Statistik Penduduk dari tabel Warga (sinkronisasi dengan Data Grafis)
+        $jumlahPenduduk = Warga::count();
+        $jumlahKK = Warga::kepalaKeluarga()->count();
+        
+        // Hitung jumlah RT dan RW berdasarkan data unik di tabel Warga
+        $jumlahRT = Warga::distinct()->whereNotNull('rt')->count('rt');
+        $jumlahRW = Warga::distinct()->whereNotNull('rw')->count('rw');
+
+        return view('beranda', compact(
+            'beritaTerbaru', 
+            'pengumumanTerbaru',
+            'jumlahPenduduk',
+            'jumlahKK',
+            'jumlahRT',
+            'jumlahRW'
+        ));
     }
 }

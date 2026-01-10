@@ -38,7 +38,7 @@
                         {!! $item->status_badge !!}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('admin.pengaduan.show', $item) }}" class="text-blue-600 hover:text-blue-900">
+                        <a href="{{ route('admin.pengaduan.show', $item) }}" class="text-green-600 hover:text-green-900">
                             Lihat Detail →
                         </a>
                     </td>

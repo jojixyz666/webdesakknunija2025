@@ -4,10 +4,10 @@
 
 @section('content')
 <!-- Header -->
-<section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+<section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Pengaduan Masyarakat</h1>
-        <p class="text-blue-100 text-lg">Sampaikan aspirasi, keluhan, atau saran Anda</p>
+        <p class="text-green-100 text-lg">Sampaikan aspirasi, keluhan, atau saran Anda</p>
     </div>
 </section>
 
@@ -15,14 +15,14 @@
 <section class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Info Card -->
-        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-8">
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-8">
             <div class="flex items-start">
-                <svg class="w-6 h-6 text-blue-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-green-500 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <div>
-                    <h3 class="font-bold text-blue-900 mb-2">Panduan Pengaduan</h3>
-                    <ul class="text-blue-800 text-sm space-y-1">
+                    <h3 class="font-bold text-green-900 mb-2">Panduan Pengaduan</h3>
+                    <ul class="text-green-800 text-sm space-y-1">
                         <li>• Isi form dengan lengkap dan jelas</li>
                         <li>• Sertakan bukti foto jika diperlukan</li>
                         <li>• Pengaduan akan ditanggapi maksimal 3 hari kerja</li>
@@ -50,7 +50,7 @@
                                id="nama" 
                                required
                                value="{{ old('nama') }}"
-                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                         @error('nama')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -67,7 +67,7 @@
                                    id="email" 
                                    required
                                    value="{{ old('email') }}"
-                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                             @error('email')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -81,7 +81,7 @@
                                    name="telepon" 
                                    id="telepon"
                                    value="{{ old('telepon') }}"
-                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                             @error('telepon')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -99,7 +99,7 @@
                                required
                                value="{{ old('judul') }}"
                                placeholder="Contoh: Jalan Rusak di RT 01"
-                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                         @error('judul')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -115,7 +115,7 @@
                                   rows="6" 
                                   required
                                   placeholder="Jelaskan detail pengaduan Anda..."
-                                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">{{ old('deskripsi') }}</textarea>
+                                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -153,7 +153,7 @@
 
                     <!-- Submit Button -->
                     <div class="pt-4">
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium text-lg">
+                        <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-4 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg font-medium text-lg">
                             <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                             </svg>
@@ -167,7 +167,7 @@
         <!-- Check Status Link -->
         <div class="mt-8 text-center">
             <p class="text-gray-600 mb-3">Sudah pernah mengajukan pengaduan?</p>
-            <a href="{{ route('pengaduan.track') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+            <a href="{{ route('pengaduan.track') }}" class="inline-flex items-center text-green-600 hover:text-green-800 font-medium">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                 </svg>

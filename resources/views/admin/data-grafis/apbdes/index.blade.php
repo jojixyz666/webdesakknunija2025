@@ -9,7 +9,7 @@
         <p class="text-gray-600">Manage data Anggaran Pendapatan dan Belanja Desa</p>
     </div>
     <a href="{{ route('admin.data-grafis.apbdes.create') }}" 
-       class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium inline-flex items-center">
+       class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium inline-flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
         </svg>
@@ -43,7 +43,7 @@
                 @forelse($data as $item)
                 <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg font-semibold inline-block">
+                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-lg font-semibold inline-block">
                             {{ $item->tahun }}
                         </div>
                     </td>
@@ -51,7 +51,7 @@
                         <span class="px-3 py-1 text-xs font-semibold rounded-full 
                             @if($item->kategori == 'Pendapatan') bg-green-100 text-green-800
                             @elseif($item->kategori == 'Belanja') bg-red-100 text-red-800
-                            @elseif($item->kategori == 'Pembiayaan Penerimaan') bg-blue-100 text-blue-800
+                            @elseif($item->kategori == 'Pembiayaan Penerimaan') bg-green-100 text-green-800
                             @elseif($item->kategori == 'Pembiayaan Pengeluaran') bg-orange-100 text-orange-800
                             @else bg-gray-100 text-gray-800
                             @endif">
@@ -68,7 +68,7 @@
                         <span class="text-sm text-gray-600">{{ $item->urutan }}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('admin.data-grafis.apbdes.edit', $item) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                        <a href="{{ route('admin.data-grafis.apbdes.edit', $item) }}" class="text-green-600 hover:text-green-900 mr-3">Edit</a>
                         <form action="{{ route('admin.data-grafis.apbdes.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                             @csrf
                             @method('DELETE')
