@@ -99,6 +99,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Data Warga Management
     Route::resource('warga', WargaController::class);
     
+    // Password Management
+    Route::get('/pengaturan/password', [AdminController::class, 'editPassword'])->name('password.edit');
+    Route::put('/pengaturan/password', [AdminController::class, 'updatePassword'])->name('password.update');
+    
     // Data Grafis Management - APBDes
     Route::get('/data-grafis/apbdes', [DataGrafisController::class, 'apbdesIndex'])->name('data-grafis.apbdes.index');
     Route::get('/data-grafis/apbdes/create', [DataGrafisController::class, 'apbdesCreate'])->name('data-grafis.apbdes.create');
