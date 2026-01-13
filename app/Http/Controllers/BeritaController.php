@@ -51,8 +51,8 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'judul' => 'required|max:255',
-            'konten' => 'required',
+            'judul' => 'required|string|max:255',
+            'konten' => 'required|string',
             'kategori' => 'required|in:berita,pengumuman',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tampilkan' => 'boolean',
@@ -62,9 +62,19 @@ class BeritaController extends Controller
         $validated['user_id'] = auth()->id();
         $validated['tampilkan'] = $request->has('tampilkan');
 
-        // Upload gambar ke storage/app/public/berita/
+        // Upload gambar dengan keamanan tambahan
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('berita', 'public');
+            $file = $request->file('gambar');
+            
+            // Validasi MIME type secara manual
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+            if (!in_array($file->getMimeType(), $allowedMimes)) {
+                return back()->withErrors(['gambar' => 'Format file tidak valid.']);
+            }
+            
+            // Generate nama file unik dengan hash untuk keamanan
+            $fileName = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+            $validated['gambar'] = $file->storeAs('berita', $fileName, 'public');
         }
 
         Berita::create($validated);
@@ -81,8 +91,8 @@ class BeritaController extends Controller
     public function update(Request $request, Berita $berita)
     {
         $validated = $request->validate([
-            'judul' => 'required|max:255',
-            'konten' => 'required',
+            'judul' => 'required|string|max:255',
+            'konten' => 'required|string',
             'kategori' => 'required|in:berita,pengumuman',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tampilkan' => 'boolean',

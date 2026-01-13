@@ -1,2 +1,21 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: {{ url('/sitemap.xml') }}
+
+# Disallow admin area
+Disallow: /admin/
+Disallow: /login
+
+# Disallow file uploads (mencegah indexing file user)
+Disallow: /storage/
+
+# Allow public pages
+Allow: /
+Allow: /berita
+Allow: /pengaduan
+Allow: /peta
+Allow: /profile
+Allow: /transparansi
+Allow: /data-grafis

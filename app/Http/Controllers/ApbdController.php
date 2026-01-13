@@ -32,17 +32,24 @@ class ApbdController extends Controller
         $request->validate([
             'tahun' => 'required|integer|min:2000|max:2100',
             'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'deskripsi' => 'nullable|string|max:2000',
             'file' => 'required|file|mimes:pdf|max:10240', // Max 10MB
         ]);
 
         $file = $request->file('file');
-        $fileName = time() . '_' . $file->getClientOriginalName();
+        
+        // Validasi MIME type PDF
+        if ($file->getMimeType() !== 'application/pdf') {
+            return back()->withErrors(['file' => 'File harus berformat PDF.'])->withInput();
+        }
+        
+        // Generate nama file aman
+        $fileName = time() . '_' . md5($file->getClientOriginalName()) . '.pdf';
         $filePath = $file->storeAs('apbd', $fileName, 'public');
 
         Apbd::create([
             'tahun' => $request->tahun,
-            'judul' => $request->judul,
+            'judul' => htmlspecialchars($request->judul, ENT_QUOTES, 'UTF-8'),
             'deskripsi' => $request->deskripsi,
             'file_path' => $filePath,
         ]);

@@ -76,7 +76,7 @@
 
                 <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                    <select name="status" id="status" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">
+                    <select name="status" id="status" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500">
                         <option value="pending" {{ $pengaduan->status === 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="proses" {{ $pengaduan->status === 'proses' ? 'selected' : '' }}>Proses</option>
                         <option value="selesai" {{ $pengaduan->status === 'selesai' ? 'selected' : '' }}>Selesai</option>
@@ -85,10 +85,10 @@
 
                 <div class="mb-4">
                     <label for="tanggapan" class="block text-sm font-medium text-gray-700 mb-2">Tanggapan</label>
-                    <textarea name="tanggapan" id="tanggapan" rows="5" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500">{{ old('tanggapan', $pengaduan->tanggapan) }}</textarea>
+                    <textarea name="tanggapan" id="tanggapan" rows="5" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500">{{ old('tanggapan', $pengaduan->tanggapan) }}</textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium">
                     Update Status
                 </button>
             </form>

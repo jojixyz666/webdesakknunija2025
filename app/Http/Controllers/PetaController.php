@@ -53,21 +53,31 @@ class PetaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_lokasi' => 'required|max:255',
-            'deskripsi' => 'nullable',
+            'nama_lokasi' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:1000',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
             'kategori' => 'required|in:fasilitas_umum,wisata,pemerintahan,lainnya',
-            'icon' => 'nullable|max:255',
+            'icon' => 'nullable|string|max:255',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'tampilkan' => 'boolean',
         ]);
 
         $validated['tampilkan'] = $request->has('tampilkan');
 
-        // Upload gambar ke storage/app/public/peta/
+        // Upload gambar dengan keamanan tambahan
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('peta', 'public');
+            $file = $request->file('gambar');
+            
+            // Validasi MIME type
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+            if (!in_array($file->getMimeType(), $allowedMimes)) {
+                return back()->withErrors(['gambar' => 'Format file tidak valid.'])->withInput();
+            }
+            
+            // Generate nama file unik
+            $fileName = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+            $validated['gambar'] = $file->storeAs('peta', $fileName, 'public');
         }
 
         Peta::create($validated);

@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
+            \App\Http\Middleware\SecurityHeaders::class,
             \App\Http\Middleware\SharePengaturan::class,
+            \App\Http\Middleware\LogAdminActivity::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -4,10 +4,10 @@
 
 @section('content')
 <!-- Header -->
-<section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+<section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Berita & Pengumuman</h1>
-        <p class="text-blue-100 text-lg">Informasi terkini dari desa</p>
+        <p class="text-green-100 text-lg">Informasi terkini dari desa</p>
     </div>
 </section>
 
@@ -31,7 +31,7 @@
                                     Pengumuman
                                 </span>
                             @else
-                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-600 text-white shadow-sm transition-colors duration-300">
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-600 text-white shadow-sm transition-colors duration-300">
                                     {{ ucfirst($item->kategori) }}
                                 </span>
                             @endif
@@ -52,11 +52,11 @@
                                 {{ $item->user->name }}
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors line-clamp-2">
                             {{ $item->judul }}
                         </h3>
                         <p class="text-gray-600 mb-4 line-clamp-3">{{ $item->kutipan }}</p>
-                        <div class="flex items-center text-blue-600 font-medium">
+                        <div class="flex items-center text-green-600 font-medium">
                             <span>Baca Selengkapnya</span>
                             <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>

@@ -25,16 +25,27 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8',
         ], [
             'email.required' => 'Email harus diisi',
             'email.email' => 'Format email tidak valid',
+            'email.max' => 'Email terlalu panjang',
             'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 8 karakter',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+        // Sanitasi input untuk mencegah injection
+        $credentials = [
+            'email' => filter_var($request->email, FILTER_SANITIZE_EMAIL),
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
+            
+            // Set session timeout (30 menit)
+            config(['session.lifetime' => 30]);
             
             return redirect()->intended(route('admin.dashboard'));
         }
@@ -54,6 +65,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect()->route('beranda');
+        return redirect()->route('login');
     }
 }

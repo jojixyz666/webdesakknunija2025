@@ -50,14 +50,40 @@ class Berita extends Model
 
         static::creating(function ($berita) {
             if (empty($berita->slug)) {
-                $berita->slug = Str::slug($berita->judul);
+                $berita->slug = static::generateUniqueSlug($berita->judul);
             }
         });
 
         static::updating(function ($berita) {
             if ($berita->isDirty('judul')) {
-                $berita->slug = Str::slug($berita->judul);
+                $berita->slug = static::generateUniqueSlug($berita->judul, $berita->id);
             }
         });
+    }
+
+    /**
+     * Generate a unique slug from the given title
+     *
+     * @param string $title
+     * @param int|null $ignoreId
+     * @return string
+     */
+    protected static function generateUniqueSlug($title, $ignoreId = null)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        // Check if slug exists, excluding the current record if updating
+        while (static::where('slug', $slug)
+            ->when($ignoreId, function ($query, $ignoreId) {
+                return $query->where('id', '!=', $ignoreId);
+            })
+            ->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
     }
 }

@@ -31,7 +31,7 @@
                            id="judul" 
                            required
                            value="{{ old('judul', $berita->judul ?? '') }}"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                     @error('judul')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -46,7 +46,7 @@
                               id="konten" 
                               rows="15" 
                               required
-                              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">{{ old('konten', $berita->konten ?? '') }}</textarea>
+                              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">{{ old('konten', $berita->konten ?? '') }}</textarea>
                     @error('konten')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -99,7 +99,7 @@
                     <select name="kategori" 
                             id="kategori" 
                             required
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                         <option value="berita" {{ old('kategori', $berita->kategori ?? 'berita') === 'berita' ? 'selected' : '' }}>Berita</option>
                         <option value="pengumuman" {{ old('kategori', $berita->kategori ?? '') === 'pengumuman' ? 'selected' : '' }}>Pengumuman</option>
                     </select>
@@ -117,7 +117,7 @@
                            name="tanggal_publikasi" 
                            id="tanggal_publikasi"
                            value="{{ old('tanggal_publikasi', isset($berita) ? $berita->tanggal_publikasi->format('Y-m-d\TH:i') : now()->format('Y-m-d\TH:i')) }}"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                     @error('tanggal_publikasi')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -130,7 +130,7 @@
                            id="tampilkan"
                            value="1"
                            {{ old('tampilkan', $berita->tampilkan ?? true) ? 'checked' : '' }}
-                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                           class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
                     <label for="tampilkan" class="ml-2 text-sm font-medium text-gray-700">
                         Tampilkan di website
                     </label>
@@ -140,7 +140,7 @@
             <!-- Actions -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                 <button type="submit" 
-                        class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium mb-3">
+                        class="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium mb-3">
                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                     </svg>

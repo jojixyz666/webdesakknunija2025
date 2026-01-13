@@ -2,12 +2,56 @@
 
 @section('title', $berita->judul)
 
+@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155))
+@section('meta_keywords', $berita->kategori . ', berita desa, ' . ($pengaturan['nama_desa'] ?? 'desa') . ', ' . $berita->judul)
+
+@section('canonical', route('berita.show', $berita->slug))
+
+@section('og_type', 'article')
+@section('og_title', $berita->judul)
+@section('og_description', \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155))
+@section('og_image', $berita->gambar ? $berita->gambar_url : (isset($pengaturan['logo_desa']) ? asset('storage/' . $pengaturan['logo_desa']) : ''))
+@section('og_url', route('berita.show', $berita->slug))
+
+@section('twitter_title', $berita->judul)
+@section('twitter_description', \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155))
+@section('twitter_image', $berita->gambar ? $berita->gambar_url : (isset($pengaturan['logo_desa']) ? asset('storage/' . $pengaturan['logo_desa']) : ''))
+
+@push('structured-data')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "NewsArticle",
+    "headline": "{{ $berita->judul }}",
+    "image": "{{ $berita->gambar ? $berita->gambar_url : '' }}",
+    "datePublished": "{{ $berita->tanggal_publikasi->toIso8601String() }}",
+    "dateModified": "{{ $berita->updated_at->toIso8601String() }}",
+    "author": {
+        "@@type": "Person",
+        "name": "{{ $berita->user->name }}"
+    },
+    "publisher": {
+        "@@type": "Organization",
+        "name": "{{ $pengaturan['nama_desa'] ?? 'Pemerintah Desa' }}"@if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa'])),
+        "logo": {
+            "@@type": "ImageObject",
+            "url": "{{ asset('storage/' . $pengaturan['logo_desa']) }}"
+        }@endif
+
+    },
+    "description": "{{ \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155) }}",
+    "articleSection": "{{ ucfirst($berita->kategori) }}",
+    "inLanguage": "id-ID"
+}
+</script>
+@endpush
+
 @section('content')
 <!-- Header -->
-<section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
+<section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-4">
-            <a href="{{ request('from') === 'beranda' ? route('beranda') : route('berita.index') }}" class="inline-flex items-center text-blue-100 hover:text-white transition">
+            <a href="{{ request('from') === 'beranda' ? route('beranda') : route('berita.index') }}" class="inline-flex items-center text-green-100 hover:text-white transition">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
@@ -15,11 +59,11 @@
             </a>
         </div>
         <div class="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4"
-             class="{{ $berita->kategori === 'pengumuman' ? 'bg-yellow-500' : 'bg-blue-500' }}">
+             class="{{ $berita->kategori === 'pengumuman' ? 'bg-yellow-500' : 'bg-green-500' }}">
             {{ ucfirst($berita->kategori) }}
         </div>
         <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ $berita->judul }}</h1>
-        <div class="flex flex-wrap items-center gap-4 text-blue-100">
+        <div class="flex flex-wrap items-center gap-4 text-green-100">
             <div class="flex items-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -59,7 +103,7 @@
                     <div class="flex flex-wrap gap-3">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('berita.show', $berita->slug)) }}" 
                            target="_blank"
-                           class="share-btn bg-blue-600 hover:bg-blue-700">
+                           class="share-btn bg-green-600 hover:bg-green-700">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                             </svg>
@@ -103,7 +147,7 @@
                             <div class="text-sm text-gray-500 mb-2">
                                 {{ $item->tanggal_publikasi->format('d M Y') }}
                             </div>
-                            <h3 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2">
+                            <h3 class="text-lg font-bold text-gray-900 hover:text-green-600 transition-colors line-clamp-2">
                                 {{ $item->judul }}
                             </h3>
                         </div>

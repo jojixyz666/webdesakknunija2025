@@ -4,10 +4,10 @@
 
 @section('content')
 <!-- Header -->
-<section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+<section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Cek Status Pengaduan</h1>
-        <p class="text-blue-100 text-lg">Lacak pengaduan Anda dengan email</p>
+        <p class="text-green-100 text-lg">Lacak pengaduan Anda dengan email</p>
     </div>
 </section>
 
@@ -23,9 +23,9 @@
                            placeholder="Masukkan email yang didaftarkan"
                            value="{{ request('email') }}"
                            required
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                 </div>
-                <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                <button type="submit" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
@@ -97,7 +97,7 @@
                                 <!-- Diproses -->
                                 <div class="flex items-start">
                                     @php $inProcess = in_array($item->status, ['proses','selesai']); @endphp
-                                    <div class="w-2 h-2 rounded-full mt-2 mr-3 {{ $inProcess ? 'bg-blue-500' : 'bg-gray-300' }}"></div>
+                                    <div class="w-2 h-2 rounded-full mt-2 mr-3 {{ $inProcess ? 'bg-green-500' : 'bg-gray-300' }}"></div>
                                     <div>
                                         <p class="font-medium text-gray-900">Diproses</p>
                                         @if($item->status === 'proses')
@@ -127,7 +127,7 @@
                 </svg>
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">Tidak Ada Pengaduan</h3>
                 <p class="text-gray-500">Tidak ditemukan pengaduan dengan email tersebut</p>
-                <a href="{{ route('pengaduan.index') }}" class="inline-block mt-6 text-blue-600 hover:text-blue-800 font-medium">
+                <a href="{{ route('pengaduan.index') }}" class="inline-block mt-6 text-green-600 hover:text-green-800 font-medium">
                     Buat Pengaduan Baru →
                 </a>
             </div>

@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Header Section -->
-<section class="bg-gradient-to-r from-blue-600 to-blue-800 py-20">
+<section class="bg-gradient-to-r from-green-600 to-green-800 py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
@@ -15,7 +15,7 @@
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
                 Transparansi Dana Desa
             </h1>
-            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+            <p class="text-xl text-green-100 max-w-3xl mx-auto">
                 Akses dokumen APBD (Anggaran Pendapatan dan Belanja Desa) untuk transparansi penggunaan dana desa
             </p>
         </div>
@@ -37,10 +37,10 @@
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach($apbdList as $apbd)
             <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+                <div class="bg-gradient-to-r from-green-500 to-green-600 p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-blue-100 text-sm font-medium mb-1">Tahun Anggaran</p>
+                            <p class="text-green-100 text-sm font-medium mb-1">Tahun Anggaran</p>
                             <h2 class="text-4xl font-bold text-white">{{ $apbd->tahun }}</h2>
                         </div>
                         <div class="bg-white/20 p-3 rounded-lg">
@@ -85,12 +85,12 @@
 </section>
 
 <!-- Info Section -->
-<section class="bg-blue-50 py-12">
+<section class="bg-green-50 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-md p-8">
             <div class="flex items-start">
                 <div class="flex-shrink-0">
-                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                 </div>
