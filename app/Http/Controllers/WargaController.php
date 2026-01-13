@@ -55,12 +55,12 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nik' => 'required|string|size:16|unique:warga,nik',
+            'nik' => 'required|string|size:16|unique:warga,nik|regex:/^[0-9]+$/',
             'nama' => 'required|string|max:255',
-            'nomor_kk' => 'required|string|size:16',
+            'nomor_kk' => 'required|string|size:16|regex:/^[0-9]+$/',
             'jenis_kelamin' => 'required|in:L,P',
             'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'required|date|before:today',
             'agama' => 'required|string|max:255',
             'pendidikan' => 'nullable|string|max:255',
             'pekerjaan' => 'nullable|string|max:255',
@@ -72,6 +72,10 @@ class WargaController extends Controller
             'alamat' => 'required|string',
             'wajib_pilih' => 'boolean',
             'kewarganegaraan' => 'required|string|max:255',
+        ], [
+            'nik.regex' => 'NIK harus berupa angka.',
+            'nomor_kk.regex' => 'Nomor KK harus berupa angka.',
+            'tanggal_lahir.before' => 'Tanggal lahir harus sebelum hari ini.',
         ]);
 
         $validated['wajib_pilih'] = $request->has('wajib_pilih');
@@ -104,12 +108,12 @@ class WargaController extends Controller
     public function update(Request $request, Warga $warga)
     {
         $validated = $request->validate([
-            'nik' => 'required|string|size:16|unique:warga,nik,' . $warga->id,
+            'nik' => 'required|string|size:16|unique:warga,nik,' . $warga->id . '|regex:/^[0-9]+$/',
             'nama' => 'required|string|max:255',
-            'nomor_kk' => 'required|string|size:16',
+            'nomor_kk' => 'required|string|size:16|regex:/^[0-9]+$/',
             'jenis_kelamin' => 'required|in:L,P',
             'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'required|date|before:today',
             'agama' => 'required|string|max:255',
             'pendidikan' => 'nullable|string|max:255',
             'pekerjaan' => 'nullable|string|max:255',

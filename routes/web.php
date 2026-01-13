@@ -12,14 +12,19 @@ use App\Http\Controllers\ApbdController;
 use App\Http\Controllers\ProfileDesaController;
 use App\Http\Controllers\DataGrafisController;
 use App\Http\Controllers\WargaController;
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\UserProfileController;
 
 // Public Routes
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
 // Authentication Routes (admin login at /admin/login)
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/admin/login', [AuthController::class, 'login']);
+    Route::post('/admin/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
 });
 
 // Accessible redirect for /login regardless of session
@@ -45,7 +50,7 @@ Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
-Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store')->middleware('throttle:5,60');
 Route::get('/pengaduan/lacak', [PengaduanController::class, 'track'])->name('pengaduan.track');
 
 Route::get('/peta', [PetaController::class, 'index'])->name('peta.index');
@@ -102,6 +107,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Password Management
     Route::get('/pengaturan/password', [AdminController::class, 'editPassword'])->name('password.edit');
     Route::put('/pengaturan/password', [AdminController::class, 'updatePassword'])->name('password.update');
+    
+    // User Profile Management (Edit Nama & Email)
+    Route::get('/akun/profil', [UserProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::put('/akun/profil', [UserProfileController::class, 'update'])->name('user.profile.update');
+    Route::put('/akun/password', [UserProfileController::class, 'updatePassword'])->name('user.profile.password');
     
     // Data Grafis Management - APBDes
     Route::get('/data-grafis/apbdes', [DataGrafisController::class, 'apbdesIndex'])->name('data-grafis.apbdes.index');

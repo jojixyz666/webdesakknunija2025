@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#16a34a">
     <title>Login Admin - {{ config('app.name') }}</title>
+    
+    <!-- Favicon -->
+    @php
+        $pengaturan = Cache::remember('pengaturan_all', 3600, function() {
+            return \App\Models\Pengaturan::all()->pluck('nilai', 'kunci')->toArray();
+        });
+    @endphp
+    @if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa']))
+    <link rel="icon" type="image/png" href="{{ asset('storage/' . $pengaturan['logo_desa']) }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/' . $pengaturan['logo_desa']) }}">
+    @endif
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gradient-to-br from-green-50 to-green-100 min-h-screen flex items-center justify-center p-4 sm:p-6">

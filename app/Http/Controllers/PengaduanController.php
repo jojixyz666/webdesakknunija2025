@@ -16,18 +16,38 @@ class PengaduanController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required|max:255',
-            'email' => 'required|email',
-            'telepon' => 'nullable|max:20',
-            'judul' => 'required|max:255',
-            'deskripsi' => 'required',
+            'nama' => 'required|string|max:255|regex:/^[\pL\s]+$/u',
+            'email' => 'required|email|max:255',
+            'telepon' => 'nullable|string|max:20|regex:/^[0-9+\-\s()]+$/',
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'required|string|min:10|max:2000',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ], [
+            'nama.regex' => 'Nama hanya boleh berisi huruf dan spasi.',
+            'telepon.regex' => 'Format telepon tidak valid.',
+            'deskripsi.min' => 'Deskripsi minimal 10 karakter.',
+            'deskripsi.max' => 'Deskripsi maksimal 2000 karakter.',
         ]);
 
-        // Upload gambar ke storage/app/public/pengaduan/
+        // Upload gambar dengan keamanan tambahan
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('pengaduan', 'public');
+            $file = $request->file('gambar');
+            
+            // Validasi MIME type secara manual
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+            if (!in_array($file->getMimeType(), $allowedMimes)) {
+                return back()->withErrors(['gambar' => 'Format file tidak valid.'])->withInput();
+            }
+            
+            // Generate nama file unik dengan hash
+            $fileName = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+            $validated['gambar'] = $file->storeAs('pengaduan', $fileName, 'public');
         }
+        
+        // Sanitasi deskripsi untuk mencegah XSS
+        $validated['deskripsi'] = strip_tags($validated['deskripsi'], '<p><br><strong><em><ul><li><ol>');
+        $validated['nama'] = htmlspecialchars($validated['nama'], ENT_QUOTES, 'UTF-8');
+        $validated['judul'] = htmlspecialchars($validated['judul'], ENT_QUOTES, 'UTF-8');
 
         Pengaduan::create($validated);
 
@@ -65,7 +85,7 @@ class PengaduanController extends Controller
     {
         $validated = $request->validate([
             'status' => 'required|in:pending,proses,selesai',
-            'tanggapan' => 'nullable|string',
+            'tanggapan' => 'nullable|string|max:1000',
         ]);
 
         if ($request->filled('tanggapan')) {

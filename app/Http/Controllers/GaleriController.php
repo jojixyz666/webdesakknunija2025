@@ -51,9 +51,19 @@ class GaleriController extends Controller
 
         $validated['tampilkan'] = $request->has('tampilkan');
 
-        // Upload gambar ke storage/app/public/galeri/
+        // Upload gambar dengan keamanan tambahan
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+            $file = $request->file('gambar');
+            
+            // Validasi MIME type secara manual
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+            if (!in_array($file->getMimeType(), $allowedMimes)) {
+                return back()->withErrors(['gambar' => 'Format file tidak valid.'])->withInput();
+            }
+            
+            // Generate nama file unik dengan hash untuk keamanan
+            $fileName = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+            $validated['gambar'] = $file->storeAs('galeri', $fileName, 'public');
         }
 
         Galeri::create($validated);
@@ -79,10 +89,22 @@ class GaleriController extends Controller
         $validated['tampilkan'] = $request->has('tampilkan');
 
         if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            
+            // Validasi MIME type
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+            if (!in_array($file->getMimeType(), $allowedMimes)) {
+                return back()->withErrors(['gambar' => 'Format file tidak valid.'])->withInput();
+            }
+            
+            // Hapus gambar lama
             if ($galeri->gambar) {
                 Storage::disk('public')->delete($galeri->gambar);
             }
-            $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+            
+            // Generate nama file unik
+            $fileName = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+            $validated['gambar'] = $file->storeAs('galeri', $fileName, 'public');
         }
 
         $galeri->update($validated);

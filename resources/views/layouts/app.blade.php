@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="description" content="{{ $pengaturan['deskripsi_desa'] ?? 'Website Resmi Desa' }}">
+    <meta name="description" content="@yield('meta_description', $pengaturan['deskripsi_desa'] ?? 'Website Resmi Desa - Informasi, Berita, dan Layanan Masyarakat')">
+    <meta name="keywords" content="@yield('meta_keywords', ($pengaturan['nama_desa'] ?? 'desa') . ', ' . ($pengaturan['kecamatan'] ?? '') . ', berita desa, pengaduan, transparansi, APBD, peta desa, layanan masyarakat')">
+    <meta name="author" content="{{ $pengaturan['nama_desa'] ?? 'Pemerintah Desa' }}">
     <meta name="theme-color" content="#16a34a">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="@yield('canonical', url()->current())">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:url" content="@yield('og_url', url()->current())">
+    <meta property="og:title" content="@yield('og_title', ($pengaturan['nama_desa'] ?? 'Website Desa'))">
+    <meta property="og:description" content="@yield('og_description', $pengaturan['deskripsi_desa'] ?? 'Website Resmi Desa')">
+    <meta property="og:image" content="@yield('og_image', isset($pengaturan['logo_desa']) ? asset('storage/' . $pengaturan['logo_desa']) : asset('images/default-og.jpg'))">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="{{ $pengaturan['nama_desa'] ?? 'Website Desa' }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="@yield('twitter_url', url()->current())">
+    <meta name="twitter:title" content="@yield('twitter_title', ($pengaturan['nama_desa'] ?? 'Website Desa'))">
+    <meta name="twitter:description" content="@yield('twitter_description', $pengaturan['deskripsi_desa'] ?? 'Website Resmi Desa')">
+    <meta name="twitter:image" content="@yield('twitter_image', isset($pengaturan['logo_desa']) ? asset('storage/' . $pengaturan['logo_desa']) : asset('images/default-og.jpg'))">
+    
     <title>@yield('title', 'Beranda') - {{ $pengaturan['nama_desa'] ?? 'Desa' }}</title>
+    
+    <!-- Favicon -->
+    @if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa']))
+    <link rel="icon" type="image/png" href="{{ asset('storage/' . $pengaturan['logo_desa']) }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/' . $pengaturan['logo_desa']) }}">
+    @endif
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
@@ -13,6 +43,24 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Alpine Intersect plugin for x-intersect -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "GovernmentOrganization",
+        "name": "{{ $pengaturan['nama_desa'] ?? 'Desa' }}",
+        "description": "{{ $pengaturan['deskripsi_desa'] ?? 'Website Resmi Pemerintah Desa' }}",
+        "url": "{{ url('/') }}",
+        "areaServed": "{{ $pengaturan['nama_desa'] ?? 'Desa' }}",
+        "sameAs": [
+            "{{ url('/profile') }}",
+            "{{ url('/transparansi') }}"
+        ]
+    }
+    </script>
+    
+    @stack('structured-data')
     
     <!-- Leaflet for maps -->
     @stack('head-scripts')

@@ -6,6 +6,12 @@
     <meta name="theme-color" content="#111827">
     <title>@yield('title', 'Dashboard') - CMS Admin</title>
     
+    <!-- Favicon -->
+    @if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa']))
+    <link rel="icon" type="image/png" href="{{ asset('storage/' . $pengaturan['logo_desa']) }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/' . $pengaturan['logo_desa']) }}">
+    @endif
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -122,11 +128,11 @@
                     Pengaturan
                 </a>
 
-                <a href="{{ route('admin.password.edit') }}" class="sidebar-link {{ request()->routeIs('admin.password.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.user.profile.edit') }}" class="sidebar-link {{ request()->routeIs('admin.user.profile.*') ? 'active' : '' }}">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
-                    Ubah Password
+                    Profil Akun
                 </a>
 
                 <div class="border-t border-gray-800 my-4"></div>

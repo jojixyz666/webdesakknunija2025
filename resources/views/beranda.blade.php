@@ -2,6 +2,26 @@
 
 @section('title', 'Beranda')
 
+@section('meta_description', $pengaturan['deskripsi_desa'] ?? 'Website Resmi Desa - Portal Informasi dan Layanan Masyarakat')
+@section('meta_keywords', ($pengaturan['nama_desa'] ?? 'desa') . ', ' . ($pengaturan['kecamatan'] ?? '') . ', berita desa, pengaduan masyarakat, transparansi APBD, peta desa, layanan publik')
+
+@push('structured-data')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "WebSite",
+    "name": "{{ $pengaturan['nama_desa'] ?? 'Website Desa' }}",
+    "description": "{{ $pengaturan['deskripsi_desa'] ?? 'Website Resmi Pemerintah Desa' }}",
+    "url": "{{ url('/') }}",
+    "potentialAction": {
+        "@@type": "SearchAction",
+        "target": "{{ url('/berita') }}?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+@endpush
+
 @section('content')
 <!-- Hero Section / Banner -->
 <section class="relative h-[600px] overflow-hidden">

@@ -2,6 +2,50 @@
 
 @section('title', $berita->judul)
 
+@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155))
+@section('meta_keywords', $berita->kategori . ', berita desa, ' . ($pengaturan['nama_desa'] ?? 'desa') . ', ' . $berita->judul)
+
+@section('canonical', route('berita.show', $berita->slug))
+
+@section('og_type', 'article')
+@section('og_title', $berita->judul)
+@section('og_description', \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155))
+@section('og_image', $berita->gambar ? $berita->gambar_url : (isset($pengaturan['logo_desa']) ? asset('storage/' . $pengaturan['logo_desa']) : ''))
+@section('og_url', route('berita.show', $berita->slug))
+
+@section('twitter_title', $berita->judul)
+@section('twitter_description', \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155))
+@section('twitter_image', $berita->gambar ? $berita->gambar_url : (isset($pengaturan['logo_desa']) ? asset('storage/' . $pengaturan['logo_desa']) : ''))
+
+@push('structured-data')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "NewsArticle",
+    "headline": "{{ $berita->judul }}",
+    "image": "{{ $berita->gambar ? $berita->gambar_url : '' }}",
+    "datePublished": "{{ $berita->tanggal_publikasi->toIso8601String() }}",
+    "dateModified": "{{ $berita->updated_at->toIso8601String() }}",
+    "author": {
+        "@@type": "Person",
+        "name": "{{ $berita->user->name }}"
+    },
+    "publisher": {
+        "@@type": "Organization",
+        "name": "{{ $pengaturan['nama_desa'] ?? 'Pemerintah Desa' }}"@if(isset($pengaturan['logo_desa']) && !empty($pengaturan['logo_desa'])),
+        "logo": {
+            "@@type": "ImageObject",
+            "url": "{{ asset('storage/' . $pengaturan['logo_desa']) }}"
+        }@endif
+
+    },
+    "description": "{{ \Illuminate\Support\Str::limit(strip_tags($berita->konten), 155) }}",
+    "articleSection": "{{ ucfirst($berita->kategori) }}",
+    "inLanguage": "id-ID"
+}
+</script>
+@endpush
+
 @section('content')
 <!-- Header -->
 <section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-12">

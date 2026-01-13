@@ -16,10 +16,17 @@ class Galeri extends Model
         'deskripsi',
         'gambar',
         'kategori',
+        'tampilkan',
     ];
 
     protected $casts = [
+        'tampilkan' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function getGambarUrlAttribute()
+    {
+        return $this->gambar ? asset('storage/' . $this->gambar) : null;
+    }
 }
