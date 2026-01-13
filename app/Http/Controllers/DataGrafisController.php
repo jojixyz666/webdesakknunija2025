@@ -122,12 +122,12 @@ class DataGrafisController extends Controller
             ->with('success', 'Data APBDes berhasil ditambahkan.');
     }
 
-    public function apbdesEdit(DataApbdes $apbdes)
+    public function apbdesEdit(DataApbdes $dataApbdes)
     {
-        return view('admin.data-grafis.apbdes.edit', compact('apbdes'));
+        return view('admin.data-grafis.apbdes.edit', compact('dataApbdes'));
     }
 
-    public function apbdesUpdate(Request $request, DataApbdes $apbdes)
+    public function apbdesUpdate(Request $request, DataApbdes $dataApbdes)
     {
         $request->validate([
             'tahun' => 'required|integer|min:2000|max:2100',
@@ -137,15 +137,15 @@ class DataGrafisController extends Controller
             'urutan' => 'nullable|integer|min:0',
         ]);
 
-        $apbdes->update($request->all());
+        $dataApbdes->update($request->all());
 
         return redirect()->route('admin.data-grafis.apbdes.index')
             ->with('success', 'Data APBDes berhasil diperbarui.');
     }
 
-    public function apbdesDestroy(DataApbdes $apbdes)
+    public function apbdesDestroy(DataApbdes $dataApbdes)
     {
-        $apbdes->delete();
+        $dataApbdes->delete();
 
         return redirect()->route('admin.data-grafis.apbdes.index')
             ->with('success', 'Data APBDes berhasil dihapus.');

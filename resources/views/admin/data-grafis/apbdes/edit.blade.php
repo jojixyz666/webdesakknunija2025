@@ -8,7 +8,7 @@
     <p class="text-gray-600">Update data anggaran pendapatan dan belanja desa</p>
 </div>
 
-<form action="{{ route('admin.data-grafis.apbdes.update', $apbdes) }}" method="POST">
+<form action="{{ route('admin.data-grafis.apbdes.update', $dataApbdes) }}" method="POST">
     @csrf
     @method('PUT')
 
@@ -24,7 +24,7 @@
                     <input type="number" 
                            name="tahun" 
                            id="tahun" 
-                           value="{{ old('tahun', $apbdes->tahun) }}"
+                           value="{{ old('tahun', $dataApbdes->tahun) }}"
                            min="2000" 
                            max="2100"
                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
@@ -44,10 +44,10 @@
                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                             required>
                         <option value="">-- Pilih Kategori --</option>
-                        <option value="Pendapatan" {{ old('kategori', $apbdes->kategori) == 'Pendapatan' ? 'selected' : '' }}>Pendapatan</option>
-                        <option value="Belanja" {{ old('kategori', $apbdes->kategori) == 'Belanja' ? 'selected' : '' }}>Belanja</option>
-                        <option value="Pembiayaan Penerimaan" {{ old('kategori', $apbdes->kategori) == 'Pembiayaan Penerimaan' ? 'selected' : '' }}>Pembiayaan Penerimaan</option>
-                        <option value="Pembiayaan Pengeluaran" {{ old('kategori', $apbdes->kategori) == 'Pembiayaan Pengeluaran' ? 'selected' : '' }}>Pembiayaan Pengeluaran</option>
+                        <option value="Pendapatan" {{ old('kategori', $dataApbdes->kategori) == 'Pendapatan' ? 'selected' : '' }}>Pendapatan</option>
+                        <option value="Belanja" {{ old('kategori', $dataApbdes->kategori) == 'Belanja' ? 'selected' : '' }}>Belanja</option>
+                        <option value="Pembiayaan Penerimaan" {{ old('kategori', $dataApbdes->kategori) == 'Pembiayaan Penerimaan' ? 'selected' : '' }}>Pembiayaan Penerimaan</option>
+                        <option value="Pembiayaan Pengeluaran" {{ old('kategori', $dataApbdes->kategori) == 'Pembiayaan Pengeluaran' ? 'selected' : '' }}>Pembiayaan Pengeluaran</option>
                     </select>
                     @error('kategori')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -62,7 +62,7 @@
                     <input type="text" 
                            name="jenis" 
                            id="jenis" 
-                           value="{{ old('jenis', $apbdes->jenis) }}"
+                           value="{{ old('jenis', $dataApbdes->jenis) }}"
                            placeholder="Contoh: Pendapatan Asli Desa, Belanja Pegawai, dll"
                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                            required>
@@ -79,7 +79,7 @@
                     <input type="number" 
                            name="jumlah" 
                            id="jumlah" 
-                           value="{{ old('jumlah', $apbdes->jumlah) }}"
+                           value="{{ old('jumlah', $dataApbdes->jumlah) }}"
                            min="0"
                            step="0.01"
                            placeholder="0"
@@ -98,7 +98,7 @@
                     <input type="number" 
                            name="urutan" 
                            id="urutan" 
-                           value="{{ old('urutan', $apbdes->urutan) }}"
+                           value="{{ old('urutan', $dataApbdes->urutan) }}"
                            min="0"
                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                     @error('urutan')
@@ -137,7 +137,7 @@
                             <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            <p>Terakhir diupdate: {{ $apbdes->updated_at->format('d M Y H:i') }}</p>
+                            <p>Terakhir diupdate: {{ $dataApbdes->updated_at->format('d M Y H:i') }}</p>
                         </div>
                     </div>
                 </div>

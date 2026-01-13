@@ -301,7 +301,7 @@
             </div>
 
             <div class="border-t border-green-700 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-xs sm:text-sm">
-                <p class="text-green-100">&copy; {{ date('Y') }} {{ $pengaturan['nama_desa'] ?? 'Desa' }}. Powered by Laravel & Tailwind CSS.</p>
+                <p class="text-green-100">&copy; {{ date('Y') }} {{ $pengaturan['nama_desa'] ?? 'Desa' }}. Dibuat Oleh kkn 25 universitas wiraraja abhakte</p>
             </div>
         </div>
     </footer>
